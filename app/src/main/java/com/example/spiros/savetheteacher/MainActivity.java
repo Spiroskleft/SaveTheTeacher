@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
         txtnamefollowers=(TextView)findViewById(R.id.txtnamefollowers) ;
         buFollow=(Button)findViewById(R.id.buFollow);
         //TODO: load user data setting
-        //SaveSettings saveSettings= new SaveSettings(getApplicationContext());
-        // saveSettings.LoadData();
+        SaveSettings saveSettings= new SaveSettings(getApplicationContext());
+        saveSettings.LoadData();
         //TODO: set the adapter
 
         ListView lsNews=(ListView)findViewById(R.id.LVNews);
