@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "268061438461",
+    "firebase_url": "https://savetheteacher-ae1b0.firebaseio.com",
+    "project_id": "savetheteacher-ae1b0",
+    "storage_bucket": "savetheteacher-ae1b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268061438461:android:e74b05e9666887c1",
+        "android_client_info": {
+          "package_name": "com.example.spiros.savetheteacher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268061438461-tgvqshbg5d6ik2g05bhj7i85qg230bmu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.spiros.savetheteacher",
+            "certificate_hash": "78f8b104b848312415c79dc94a2d46aa8d0751b7"
+          }
+        },
+        {
+          "client_id": "268061438461-juren0ib0k83r7rj71e9ee6fd389gk95.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-wy8NWiXDPm3Q_4QBZFsgxAbr3VmpXIk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268061438461-juren0ib0k83r7rj71e9ee6fd389gk95.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

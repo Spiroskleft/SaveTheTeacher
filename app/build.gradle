@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
-        applicationId "com.alrubaye.twitterdemstart"
+        applicationId "com.example.spiros.savetheteacher"
         minSdkVersion 17
         targetSdkVersion 25
         versionCode 1
@@ -31,3 +31,5 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:9.6.1'
 
 }
+
+apply plugin: 'com.google.gms.google-services'
