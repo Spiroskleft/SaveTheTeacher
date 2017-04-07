@@ -138,10 +138,10 @@ EditText etName;
 
                 }
                 //TODO:  login and register
-               String url="http://10.0.2.2/twitterserver/register.php?first_name="+name+"&email="+etEmail.getText().toString()+"&password="+etPassword.getText().toString()+"&picture_path="+ downloadUrl;
+               String url="http://10.0.2.2:8083/twitterserver/register.php/twitterserver/register.php?first_name="+name+"&email="+etEmail.getText().toString()+"&password="+etPassword.getText().toString()+"&picture_path="+ downloadUrl;
 
-          //      new MyAsyncTaskgetNews().execute(url);
-            //    hideProgressDialog();
+                new MyAsyncTaskgetNews().execute(url);
+              //  hideProgressDialog();
 
             }
         });
@@ -315,7 +315,7 @@ EditText etName;
                 if (json.getString("msg").equalsIgnoreCase("user is added")) {
                     Toast.makeText(getApplicationContext(), json.getString("msg"), Toast.LENGTH_LONG).show();
 //login
-                    String url="http://10.0.2.2/~hussienalrubaye/twitterserver/login.php?email="+etEmail.getText().toString()+"&password="+etPassword.getText().toString() ;
+                    String url="http://10.0.2.2:8083/twitterserver/login.php?email="+etEmail.getText().toString()+"&password="+etPassword.getText().toString() ;
 
                     new MyAsyncTaskgetNews().execute(url);
                 }
