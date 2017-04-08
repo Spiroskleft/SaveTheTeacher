@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.SearchView;
 
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     int SelectedUserID = 0;
     Button buFollow;
     MyCustomAdapter myadapter;
+    private SignInButton mGoogleBtn ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         ChannelInfo.setVisibility(View.GONE);
         txtnamefollowers = (TextView) findViewById(R.id.txtnamefollowers);
         buFollow = (Button) findViewById(R.id.buFollow);
-
+mGoogleBtn = (SignInButton) findViewById(R.id.googleButton);
         //load user data setting
        SaveSettings saveSettings = new SaveSettings(getApplicationContext());
         saveSettings.LoadData();
@@ -96,8 +98,22 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
     }
 
     public void buFollowers(View view) {
-//TODO: add code s=for subscribe and un subscribe
 
+// subscribe and un subscribe
+
+        int Operation; // 1- subsribe 2- unsubscribe
+        String Follow=buFollow.getText().toString();
+        if (Follow.equalsIgnoreCase("Follow")) {
+            Operation = 1;
+            buFollow.setText("Un Follow");
+        }
+        else {
+            Operation = 2;
+            buFollow.setText("Follow");
+        }
+
+        String url="http://10.0.2.2:8083/twitterserver/userfollowing.php?user_id="+SaveSettings.UserID +"&following_user_id="+SelectedUserID+"&op="+ Operation;
+        new MyAsyncTaskgetNews().execute(url);
 
     }
 
@@ -126,8 +142,8 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
                 } catch (UnsupportedEncodingException e) {
 
                 }
-                //TODO: search in posts
-                //LoadTweets(0,SearchType.SearchIn);// seearch
+                // search in posts
+                LoadTweets(0,SearchType.SearchIn);// seearch
                 return false;
             }
 
@@ -238,13 +254,14 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
                 txtUserName.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //TODO: Persnons Tweet
-//                        SelectedUserID=Integer.parseInt(s.user_id);
-//                        LoadTweets(0,SearchType.OnePerson);
-//                        txtnamefollowers.setText(s.first_name);
-//
-//                        String url="http://10.0.2.2/~hussienalrubaye/twitterserver/isfollowing.php?user_id="+SaveSettings.UserID +"&following_user_id="+SelectedUserID;
-//                        new  MyAsyncTaskgetNews().execute(url);
+
+                        //Persons Tweet
+                        SelectedUserID=Integer.parseInt(s.user_id);
+                        LoadTweets(0,SearchType.OnePerson);
+                        txtnamefollowers.setText(s.first_name);
+
+                        String url="http://10.0.2.2:8083/twitterserver/isfollowing.php?user_id="+SaveSettings.UserID +"&following_user_id="+SelectedUserID;
+                        new  MyAsyncTaskgetNews().execute(url);
 
 
                     }

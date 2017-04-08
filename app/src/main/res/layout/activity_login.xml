@@ -68,5 +68,10 @@
             android:textColor="#fdfffa"
             android:onClick="buLogin" />
 
+        <com.google.android.gms.common.SignInButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/googleButton"></com.google.android.gms.common.SignInButton>
+
     </LinearLayout>
 </RelativeLayout>
