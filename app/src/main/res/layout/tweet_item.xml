@@ -155,6 +155,7 @@
                 android:layout_height="25dp"
                 android:id="@+id/iv_share"
                android:layout_marginRight="8dp"
+
                 android:background="@drawable/ic_favorite_border_black_24dp" />
 
         </LinearLayout>

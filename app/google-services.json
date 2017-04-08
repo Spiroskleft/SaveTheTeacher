@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "268061438461",
-    "firebase_url": "https://savetheteacher-ae1b0.firebaseio.com",
-    "project_id": "savetheteacher-ae1b0",
-    "storage_bucket": "savetheteacher-ae1b0.appspot.com"
+    "project_number": "164868016898",
+    "firebase_url": "https://savetheteacherapp-55d47.firebaseio.com",
+    "project_id": "savetheteacherapp-55d47",
+    "storage_bucket": "savetheteacherapp-55d47.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:268061438461:android:e74b05e9666887c1",
+        "mobilesdk_app_id": "1:164868016898:android:e74b05e9666887c1",
         "android_client_info": {
           "package_name": "com.example.spiros.savetheteacher"
         }
       },
       "oauth_client": [
         {
-          "client_id": "268061438461-tgvqshbg5d6ik2g05bhj7i85qg230bmu.apps.googleusercontent.com",
+          "client_id": "164868016898-3pggma17rof38ckcl5u85kvdo37qm503.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.spiros.savetheteacher",
@@ -23,13 +23,13 @@
           }
         },
         {
-          "client_id": "268061438461-juren0ib0k83r7rj71e9ee6fd389gk95.apps.googleusercontent.com",
+          "client_id": "164868016898-02sr9m3m0ek1v8riricen2g4i68d9e72.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD-wy8NWiXDPm3Q_4QBZFsgxAbr3VmpXIk"
+          "current_key": "AIzaSyDhggbWxKYrtQ0BlOPJuLiAUn-EbBugYcc"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "268061438461-juren0ib0k83r7rj71e9ee6fd389gk95.apps.googleusercontent.com",
+              "client_id": "164868016898-02sr9m3m0ek1v8riricen2g4i68d9e72.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

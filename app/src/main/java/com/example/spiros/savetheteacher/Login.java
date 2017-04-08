@@ -84,6 +84,7 @@ EditText etName;
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
@@ -102,7 +103,7 @@ EditText etName;
         showProgressDialog();
         FirebaseStorage storage=FirebaseStorage.getInstance();
         // Create a storage reference from our app
-        StorageReference storageRef = storage.getReferenceFromUrl("gs://savetheteacher-ae1b0.appspot.com");
+        StorageReference storageRef = storage.getReferenceFromUrl("gs://savetheteacherapp-55d47.appspot.com");
         DateFormat df = new SimpleDateFormat("ddMMyyHHmmss");
         Date dateobj = new Date();
         // System.out.println(df.format(dateobj));
@@ -141,7 +142,7 @@ EditText etName;
                String url="http://10.0.2.2:8083/twitterserver/register.php/twitterserver/register.php?first_name="+name+"&email="+etEmail.getText().toString()+"&password="+etPassword.getText().toString()+"&picture_path="+ downloadUrl;
 
                 new MyAsyncTaskgetNews().execute(url);
-              //  hideProgressDialog();
+                hideProgressDialog();
 
             }
         });
