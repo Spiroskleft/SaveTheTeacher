@@ -15,6 +15,11 @@
         android:title="home"
         android:icon="@drawable/ic_home_white_24dp"
         app:showAsAction="ifRoom" />
+    <item android:id="@+id/logout"
+        android:title="logout"
+
+        android:icon="@drawable/common_google_signin_btn_icon_dark_normal"
+        app:showAsAction="always" />
 
 
 
