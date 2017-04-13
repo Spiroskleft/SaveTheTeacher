@@ -163,6 +163,10 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
                 // main search
                  LoadTweets(0,SearchType.MyFollowing);
                 return true;
+           case R.id.weatheractivity:
+               Intent launchNewIntent = new Intent(this,WeatherActivity.class);
+               startActivityForResult(launchNewIntent, 0);
+
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -519,5 +523,8 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
 
     }
 
-
+//    public void WeatherActivity(View view) {
+//        Intent intent = new Intent(this, WeatherActivity.class);
+//        startActivity(intent);
+//    }
 }

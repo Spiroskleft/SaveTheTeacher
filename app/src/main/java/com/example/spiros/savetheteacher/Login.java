@@ -22,10 +22,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
+
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -60,7 +60,7 @@ public class Login extends AppCompatActivity {
     EditText etEmail;
     EditText etPassword;
     ImageView ivUserImage;
-    private SignInButton mGoogleBtn;
+
     private static final int RC_SIGN_IN = 1;
     private GoogleApiClient mGoogleApiClient ;
 
@@ -78,36 +78,11 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mGoogleBtn = (SignInButton) findViewById(R.id.googleButton);
+
         setContentView(R.layout.activity_login);
         etName = (EditText) findViewById(R.id.etName);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
-
-        // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
-        .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
-            @Override
-            public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-            Toast.makeText(Login.this," Error Friend",Toast.LENGTH_LONG).show();
-            }
-        })
-        .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
-        .build();
-mGoogleBtn.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        signIn();
-    }
-});
-
-
-
-
         ivUserImage = (ImageView) findViewById(R.id.ivUserImage);
         ivUserImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,10 +114,6 @@ mGoogleBtn.setOnClickListener(new View.OnClickListener() {
 
             }
         };
-    }
-    private void signIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
 
@@ -302,18 +273,7 @@ mGoogleBtn.setOnClickListener(new View.OnClickListener() {
             ivUserImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 
         }
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if (result.isSuccess()) {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = result.getSignInAccount();
-                firebaseAuthWithGoogle(account);
-            } else {
-                // Google Sign In failed, update UI appropriately
-                // ...
-            }
-        }
+
 
     }
 
@@ -437,5 +397,6 @@ mGoogleBtn.setOnClickListener(new View.OnClickListener() {
 
 
     }
+
 
 }

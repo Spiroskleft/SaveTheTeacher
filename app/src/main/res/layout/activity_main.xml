@@ -118,6 +118,7 @@ android:src="@drawable/ic_account_circle_black_24dp"
                     android:onClick="buFollowers"
                     android:layout_weight="0" />
 
+
             </LinearLayout>
         </LinearLayout>
 
