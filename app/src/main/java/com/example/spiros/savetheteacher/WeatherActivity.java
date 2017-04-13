@@ -145,6 +145,7 @@ public class WeatherActivity extends AppCompatActivity {
         mgr.hideSoftInputFromWindow(windowToken, 0);
     }
 
+
     void updateUXWithWeatherData (final WeatherData data) {
         runOnUiThread(new Runnable() {
             @Override
