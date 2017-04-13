@@ -22,13 +22,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -47,10 +56,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Login extends AppCompatActivity {
-EditText etName;
+    EditText etName;
     EditText etEmail;
     EditText etPassword;
     ImageView ivUserImage;
+    private SignInButton mGoogleBtn;
+    private static final int RC_SIGN_IN = 1;
+    private GoogleApiClient mGoogleApiClient ;
+
+
+
     private static final String TAG = "AnonymousAuth";
 
     // [START declare_auth]
@@ -63,11 +78,37 @@ EditText etName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mGoogleBtn = (SignInButton) findViewById(R.id.googleButton);
         setContentView(R.layout.activity_login);
-         etName=(EditText)findViewById(R.id.etName);
-          etEmail=(EditText)findViewById(R.id.etEmail);
-          etPassword=(EditText)findViewById(R.id.etPassword);
-         ivUserImage=(ImageView) findViewById(R.id.ivUserImage);
+        etName = (EditText) findViewById(R.id.etName);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+
+        // Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
+        .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
+            @Override
+            public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+            Toast.makeText(Login.this," Error Friend",Toast.LENGTH_LONG).show();
+            }
+        })
+        .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+        .build();
+mGoogleBtn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        signIn();
+    }
+});
+
+
+
+
+        ivUserImage = (ImageView) findViewById(R.id.ivUserImage);
         ivUserImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +128,8 @@ EditText etName;
 
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
+
+                    startActivity(new Intent(Login.this, MainActivity.class));
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
@@ -97,24 +140,29 @@ EditText etName;
             }
         };
     }
+    private void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
 
     public void buLogin(View view) {
 // user login
         showProgressDialog();
-        FirebaseStorage storage=FirebaseStorage.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
         // Create a storage reference from our app
         StorageReference storageRef = storage.getReferenceFromUrl("gs://savetheteacherapp-55d47.appspot.com");
         DateFormat df = new SimpleDateFormat("ddMMyyHHmmss");
         Date dateobj = new Date();
         // System.out.println(df.format(dateobj));
 // Create a reference to "mountains.jpg"
-        final String ImagePath= df.format(dateobj) +".jpg";
-        StorageReference mountainsRef = storageRef.child("images/"+ ImagePath);
+        final String ImagePath = df.format(dateobj) + ".jpg";
+        StorageReference mountainsRef = storageRef.child("images/" + ImagePath);
         ivUserImage.setDrawingCacheEnabled(true);
         ivUserImage.buildDrawingCache();
         // Bitmap bitmap = imageView.getDrawingCache();
-        BitmapDrawable drawable=(BitmapDrawable)ivUserImage.getDrawable();
-        Bitmap bitmap =drawable.getBitmap();
+        BitmapDrawable drawable = (BitmapDrawable) ivUserImage.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
@@ -130,16 +178,16 @@ EditText etName;
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 String downloadUrl = taskSnapshot.getDownloadUrl().toString();
-                String name="";
+                String name = "";
                 try {
                     //for space with name
-                    name = java.net.URLEncoder.encode( etName.getText().toString() , "UTF-8");
-                    downloadUrl= java.net.URLEncoder.encode(downloadUrl , "UTF-8");
+                    name = java.net.URLEncoder.encode(etName.getText().toString(), "UTF-8");
+                    downloadUrl = java.net.URLEncoder.encode(downloadUrl, "UTF-8");
                 } catch (UnsupportedEncodingException e) {
 
                 }
                 //TODO:  login and register
-               String url="http://10.0.2.2:8083/twitterserver/register.php/twitterserver/register.php?first_name="+name+"&email="+etEmail.getText().toString()+"&password="+etPassword.getText().toString()+"&picture_path="+ downloadUrl;
+                String url = "http://10.0.2.2:8083/twitterserver/register.php/twitterserver/register.php?first_name=" + name + "&email=" + etEmail.getText().toString() + "&password=" + etPassword.getText().toString() + "&picture_path=" + downloadUrl;
 
                 new MyAsyncTaskgetNews().execute(url);
                 hideProgressDialog();
@@ -167,6 +215,7 @@ EditText etName;
         }
         hideProgressDialog();
     }
+
     private void signInAnonymously() {
         // [START signin_anonymously]
         mAuth.signInAnonymously()
@@ -189,23 +238,23 @@ EditText etName;
     }
 
 
-    void CheckUserPermsions(){
-        if ( Build.VERSION.SDK_INT >= 23){
+    void CheckUserPermsions() {
+        if (Build.VERSION.SDK_INT >= 23) {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) !=
-                    PackageManager.PERMISSION_GRANTED  ){
+                    PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{
                                 android.Manifest.permission.READ_EXTERNAL_STORAGE},
                         REQUEST_CODE_ASK_PERMISSIONS);
-                return ;
+                return;
             }
         }
 
         LoadImage();// init the contact list
 
     }
+
     //get acces to location permsion
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
-
 
 
     @Override
@@ -216,7 +265,7 @@ EditText etName;
                     LoadImage();// init the contact list
                 } else {
                     // Permission Denied
-                    Toast.makeText( this,"your message" , Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "your message", Toast.LENGTH_SHORT)
                             .show();
                 }
                 break;
@@ -225,14 +274,16 @@ EditText etName;
         }
     }
 
-    int RESULT_LOAD_IMAGE=346;
-    void LoadImage(){
+    int RESULT_LOAD_IMAGE = 346;
+
+    void LoadImage() {
         Intent i = new Intent(
                 Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
         startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -251,7 +302,44 @@ EditText etName;
             ivUserImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 
         }
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (result.isSuccess()) {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = result.getSignInAccount();
+                firebaseAuthWithGoogle(account);
+            } else {
+                // Google Sign In failed, update UI appropriately
+                // ...
+            }
+        }
+
     }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInWithCredential", task.getException());
+                            Toast.makeText(Login.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        // ...
+                    }
+                });
+
+    }
+
 // loading display
 
     @VisibleForTesting
@@ -272,14 +360,16 @@ EditText etName;
             mProgressDialog.dismiss();
         }
     }
+
     // get news from server
     public class MyAsyncTaskgetNews extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
             //before works
         }
+
         @Override
-        protected String  doInBackground(String... params) {
+        protected String doInBackground(String... params) {
             // TODO Auto-generated method stub
             try {
                 String NewsData;
@@ -294,7 +384,7 @@ EditText etName;
                     //getting the response data
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                     //convert the stream to string
-                    Operations operations=new Operations(getApplicationContext());
+                    Operations operations = new Operations(getApplicationContext());
                     NewsData = operations.ConvertInputToStringNoChange(in);
                     //send to display data
                     publishProgress(NewsData);
@@ -303,47 +393,47 @@ EditText etName;
                     urlConnection.disconnect();
                 }
 
-            }catch (Exception ex){}
+            } catch (Exception ex) {
+            }
             return null;
         }
+
         protected void onProgressUpdate(String... progress) {
 
             try {
-                JSONObject json= new JSONObject(progress[0]);
+                JSONObject json = new JSONObject(progress[0]);
                 //display response data
-                if (json.getString("msg")==null)
+                if (json.getString("msg") == null)
                     return;
                 if (json.getString("msg").equalsIgnoreCase("user is added")) {
                     Toast.makeText(getApplicationContext(), json.getString("msg"), Toast.LENGTH_LONG).show();
 //login
-                    String url="http://10.0.2.2:8083/twitterserver/login.php?email="+etEmail.getText().toString()+"&password="+etPassword.getText().toString() ;
+                    String url = "http://10.0.2.2:8083/twitterserver/login.php?email=" + etEmail.getText().toString() + "&password=" + etPassword.getText().toString();
 
                     new MyAsyncTaskgetNews().execute(url);
                 }
 
                 if (json.getString("msg").equalsIgnoreCase("Pass Login")) {
-                    JSONArray UserInfo=new JSONArray( json.getString("info"));
-                    JSONObject UserCreintal= UserInfo.getJSONObject(0);
+                    JSONArray UserInfo = new JSONArray(json.getString("info"));
+                    JSONObject UserCreintal = UserInfo.getJSONObject(0);
                     //Toast.makeText(getApplicationContext(),UserCreintal.getString("user_id"),Toast.LENGTH_LONG).show();
                     hideProgressDialog();
-                    SaveSettings saveSettings= new SaveSettings(getApplicationContext());
+                    SaveSettings saveSettings = new SaveSettings(getApplicationContext());
                     saveSettings.SaveData(UserCreintal.getString("user_id"));
                     finish(); //close this activity
                 }
 
             } catch (Exception ex) {
-                Log.d("er",  ex.getMessage());
+                Log.d("er", ex.getMessage());
             }
 
 
         }
 
-        protected void onPostExecute(String  result2){
+        protected void onPostExecute(String result2) {
 
 
         }
-
-
 
 
     }

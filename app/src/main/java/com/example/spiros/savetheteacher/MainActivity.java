@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     int SelectedUserID = 0;
     Button buFollow;
     MyCustomAdapter myadapter;
-    private SignInButton mGoogleBtn ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         ChannelInfo.setVisibility(View.GONE);
         txtnamefollowers = (TextView) findViewById(R.id.txtnamefollowers);
         buFollow = (Button) findViewById(R.id.buFollow);
-mGoogleBtn = (SignInButton) findViewById(R.id.googleButton);
         //load user data setting
        SaveSettings saveSettings = new SaveSettings(getApplicationContext());
         saveSettings.LoadData();
