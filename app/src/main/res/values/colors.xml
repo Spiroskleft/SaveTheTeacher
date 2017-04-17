@@ -25,6 +25,10 @@
     <item name="whiteback" type="color">#f9f9f9</item>
     <item name="whitebackground" type="color">#d4d3d3</item>
     <item name="black" type="color">#FF040303</item>
+    <color name="brand_main">#33B5E5</color>
+    <color name="text">#333333</color>
+    <color name="text_de_emphasized">#666666</color>
+    <color name="text_faint">#999999</color>
     <integer-array name="androidcolors">
         <item>@color/blue</item>
         <item>@color/purple</item>
