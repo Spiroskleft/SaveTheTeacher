@@ -18,11 +18,14 @@
 
     <item android:id="@+id/weatheractivity"
         android:title="Τι καιρό θα κάνει;"
-        android:icon="@drawable/tweetsoriginal"
+        android:icon="@drawable/kairos"
         app:showAsAction="ifRoom"
 
         />
-
+    <item android:id="@+id/weatherforecast"
+    android:title="Τι καιρό θα κάνει μετά;"
+    android:icon="@drawable/kairos"
+    app:showAsAction="always" />
 
 
 

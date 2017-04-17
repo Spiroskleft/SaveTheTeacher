@@ -7,40 +7,34 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.SearchView;
+import android.widget.TextView;
 
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -167,6 +161,9 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
                Intent launchNewIntent = new Intent(this,WeatherActivity.class);
                startActivityForResult(launchNewIntent, 0);
 
+            case R.id.weatherforecast:
+                Intent launchNewIntent2 = new Intent(this,WeatherForecastActivity.class);
+                startActivityForResult(launchNewIntent2, 0);
 
             default:
                 return super.onOptionsItemSelected(item);

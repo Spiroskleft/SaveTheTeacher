@@ -4,6 +4,8 @@ package com.example.spiros.savetheteacher.Services;
  * Created by Spiros on 17/4/2017.
  */
 
+import com.example.spiros.savetheteacher.Models.CurrentWeather;
+import com.example.spiros.savetheteacher.Models.WeatherForecast;
 import com.google.gson.annotations.SerializedName;
 
 import org.apache.http.HttpException;
@@ -11,23 +13,22 @@ import org.apache.http.HttpException;
 import java.util.ArrayList;
 import java.util.List;
 
-//import mu.node.rexweather.app.Models.CurrentWeather;
-//import mu.node.rexweather.app.Models.WeatherForecast;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.http.GET;
 import retrofit.http.Query;
 import rx.Observable;
 import rx.functions.Func1;
-import com.example.spiros.savetheteacher.Models.CurrentWeather;
-import com.example.spiros.savetheteacher.Models.WeatherForecast;
+
+//import mu.node.rexweather.app.Models.CurrentWeather;
+//import mu.node.rexweather.app.Models.WeatherForecast;
 
 public class WeatherService {
     // We are implementing against version 2.5 of the Open Weather Map web service.
     private static final String WEB_SERVICE_BASE_URL = "http://api.openweathermap.org/data/2.5";
 
     //TODO Na valo API KEY
-    private static final String API_KEY = "insert your api key here";
+    private static final String API_KEY = "b52003ee4639df0f6d5437861e76f7e1";
     private final OpenWeatherMapWebService mWebService;
 
     public WeatherService() {
