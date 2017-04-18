@@ -28,7 +28,7 @@ public class WeatherService {
     private static final String WEB_SERVICE_BASE_URL = "http://api.openweathermap.org/data/2.5";
 
     //TODO Na valo API KEY
-    private static final String API_KEY = "b52003ee4639df0f6d5437861e76f7e1";
+    private static final String API_KEY = "0b68bf7fb6183ed610735e2183000e3c";
     private final OpenWeatherMapWebService mWebService;
 
     public WeatherService() {
