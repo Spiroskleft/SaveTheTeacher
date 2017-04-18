@@ -10,24 +10,19 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -158,7 +153,7 @@ public class Login extends AppCompatActivity {
 
                 }
                 //TODO:  login and register
-                String url = "http://10.0.2.2:8083/twitterserver/register.php/twitterserver/register.php?first_name=" + name + "&email=" + etEmail.getText().toString() + "&password=" + etPassword.getText().toString() + "&picture_path=" + downloadUrl;
+                String url = "http://10.0.2.2:8083/twitterserver/register.php?first_name=" + name + "&email=" + etEmail.getText().toString() + "&password=" + etPassword.getText().toString() + "&picture_path=" + downloadUrl;
 // gia okeanos: 83.212.102.247:8083
                 //gia topika: 10.0.2.2:8083
                 new MyAsyncTaskgetNews().execute(url);
