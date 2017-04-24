@@ -245,6 +245,7 @@ public class Login extends AppCompatActivity {
     }
 
     @Override
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -259,7 +260,23 @@ public class Login extends AppCompatActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
-            ivUserImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+            final int maxSize = 960;
+            int outWidth;
+            int outHeight;
+            int inWidth = BitmapFactory.decodeFile(picturePath).getWidth();
+            int inHeight = BitmapFactory.decodeFile(picturePath).getHeight();
+            if(inWidth > inHeight){
+                outWidth = maxSize;
+                outHeight = (inHeight * maxSize) / inWidth;
+            } else {
+                outHeight = maxSize;
+                outWidth = (inWidth * maxSize) / inHeight;
+            }
+
+            Bitmap t = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(picturePath), outWidth, outHeight, false);
+           // Bitmap t = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(picturePath),250,250,false);
+            ivUserImage.setImageBitmap(t);
 
         }
 
