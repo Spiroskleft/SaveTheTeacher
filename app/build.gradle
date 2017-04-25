@@ -6,7 +6,7 @@ android {
     buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "com.example.spiros.savetheteacher"
-        minSdkVersion 17
+        minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -42,6 +42,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.1.+'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.1.+'
     compile 'de.keyboardsurfer.android.widget:crouton:1.8.5@jar'
+    compile 'com.google.android.gms:play-services-auth:9.6.1'
 
     
 }
