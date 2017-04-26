@@ -145,7 +145,7 @@ public class Login extends AppCompatActivity {
                 } catch (UnsupportedEncodingException e) {
 
                 }
-                //TODO:  login and register
+                //  login and register
                 String url = "http://10.0.2.2:8083/twitterserver/register.php?first_name=" + name + "&email=" + etEmail.getText().toString() + "&password=" + etPassword.getText().toString() + "&picture_path=" + downloadUrl;
 // gia okeanos: 83.212.102.247:8083
                 //gia topika: 10.0.2.2:8083
@@ -213,7 +213,7 @@ public class Login extends AppCompatActivity {
 
     }
 
-    //get acces to location permsion
+    //get access to location permsion
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
 
