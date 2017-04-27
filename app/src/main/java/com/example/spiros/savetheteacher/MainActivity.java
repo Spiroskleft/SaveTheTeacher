@@ -105,7 +105,7 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
             buFollow.setText("Follow");
         }
 
-        String url="http://10.0.2.2:8083/twitterserver/userfollowing.php?user_id="+SaveSettings.UserID +"&following_user_id="+SelectedUserID+"&op="+ Operation;
+        String url="http://83.212.102.247:8083/twitterserver/userfollowing.php?user_id="+SaveSettings.UserID +"&following_user_id="+SelectedUserID+"&op="+ Operation;
         new MyAsyncTaskgetNews().execute(url);
 
     }
@@ -229,7 +229,7 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
                         } catch (UnsupportedEncodingException e) {
                             tweets=".";
                         }
-                        String url="http://10.0.2.2:8083/twitterserver/tweetadd.php?user_id="+ SaveSettings.UserID +"&tweet_text="+ tweets +"&tweet_picture="+ downloadUrl;
+                        String url="http://83.212.102.247:8083/twitterserver/tweetadd.php?user_id="+ SaveSettings.UserID +"&tweet_text="+ tweets +"&tweet_picture="+ downloadUrl;
                         new  MyAsyncTaskgetNews().execute(url);
                         etPost.setText("");
 
@@ -260,7 +260,7 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
                         LoadTweets(0,SearchType.OnePerson);
                         txtnamefollowers.setText(s.first_name);
 
-                        String url="http://10.0.2.2:8083/twitterserver/isfollowing.php?user_id="+SaveSettings.UserID +"&following_user_id="+SelectedUserID;
+                        String url="http://83.212.102.247:8083/twitterserver/isfollowing.php?user_id="+SaveSettings.UserID +"&following_user_id="+SelectedUserID;
                         new  MyAsyncTaskgetNews().execute(url);
 
 
@@ -504,11 +504,11 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
         myadapter.notifyDataSetChanged();
 
 
-        String url="http://10.0.2.2:8083/twitterserver/tweetlist.php?user_id="+ SaveSettings.UserID + "&StartFrom="+StartFrom + "&op="+ UserOperation;
+        String url="http://83.212.102.247:8083/twitterserver/tweetlist.php?user_id="+ SaveSettings.UserID + "&StartFrom="+StartFrom + "&op="+ UserOperation;
         if (UserOperation==SearchType.SearchIn)
-            url="http://10.0.2.2:8083/twitterserver/tweetlist.php?user_id="+ SaveSettings.UserID + "&StartFrom="+StartFrom + "&op="+ UserOperation + "&query="+ Searchquery;
+            url="http://83.212.102.247:8083/twitterserver/tweetlist.php?user_id="+ SaveSettings.UserID + "&StartFrom="+StartFrom + "&op="+ UserOperation + "&query="+ Searchquery;
         if(UserOperation==SearchType.OnePerson)
-            url="http://10.0.2.2:8083/twitterserver/tweetlist.php?user_id="+ SelectedUserID + "&StartFrom="+StartFrom + "&op="+ UserOperation;
+            url="http://83.212.102.247:8083/twitterserver/tweetlist.php?user_id="+ SelectedUserID + "&StartFrom="+StartFrom + "&op="+ UserOperation;
 
         new  MyAsyncTaskgetNews().execute(url);
 
