@@ -176,11 +176,12 @@ private String name = "";
 
             if(acct.getPhotoUrl() != null)
                 new LoadProfileImage(imgProfilePic).execute(acct.getPhotoUrl().toString());
-            name = acct.getDisplayName().toString();
-            etEmail = acct.getEmail().toString();
+            name = acct.getDisplayName();
+            etEmail = acct.getEmail();
             etpassword = "Google Signed In" ;
-            downloadUrl = acct.getPhotoUrl().toString();
-            UserID = acct.getId().toString();
+         //   downloadUrl = acct.getPhotoUrl().toString();
+            downloadUrl = imgProfilePic.toString();
+            UserID = acct.getId();
 
 
 
