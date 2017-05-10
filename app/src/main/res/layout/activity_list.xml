@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+    <Button
+        android:id="@+id/btl_list_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="addItem"
+        android:text="Add Item"
+      />
+
+    <Button
+        android:id="@+id/btl_list_load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="loadRegions"
+        android:text="Load Regions" />
+
+    <EditText
+        android:id="@+id/txt_list_region_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Region Name"
+        />
+
+    <ListView
+        android:id="@+id/listview_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        />
+
+
+</LinearLayout>

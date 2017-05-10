@@ -28,7 +28,7 @@ public class SaveSettings {
         UserID = ShredRef.getString("UserID", "0");
         if (UserID.equals("0")) {
 
-            Intent intent = new Intent(context, LoginWithGoogle.class);
+            Intent intent = new Intent(context, Login.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }

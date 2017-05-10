@@ -27,6 +27,11 @@
     android:icon="@drawable/prognosi"
     app:showAsAction="always" />
 
+    <item android:id="@+id/activitylist"
+        android:title="Περιοχές"
+
+        app:showAsAction="always" />
+
 
 
 </menu>

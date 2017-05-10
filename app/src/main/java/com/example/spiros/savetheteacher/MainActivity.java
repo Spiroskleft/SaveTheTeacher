@@ -164,7 +164,9 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
             case R.id.weatherforecast:
                 Intent launchNewIntent2 = new Intent(this,WeatherForecastActivity.class);
                 startActivityForResult(launchNewIntent2, 0);
-
+            case R.id.activitylist:
+                Intent launchNewIntent3 = new Intent(this,ListRegion.class);
+                startActivityForResult(launchNewIntent3, 0);
             default:
                 return super.onOptionsItemSelected(item);
         }
