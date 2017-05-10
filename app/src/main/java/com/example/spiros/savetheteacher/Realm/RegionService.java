@@ -10,7 +10,7 @@ import retrofit2.http.Path;
 
 public interface RegionService {
 
-    @GET("Region/(id)")
+    @GET("perioxes")
 
     Call<Region> getRegion(@Path("id") String id);
 

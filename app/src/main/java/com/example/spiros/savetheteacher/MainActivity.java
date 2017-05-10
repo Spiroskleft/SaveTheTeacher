@@ -50,6 +50,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 public class MainActivity extends AppCompatActivity {
     //adapter class
     ArrayList<AdapterItems> listnewsData = new ArrayList<AdapterItems>();
@@ -87,6 +90,13 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
         lsNews.setAdapter(myadapter);// with data
         LoadTweets(0,SearchType.MyFollowing);
 
+        //Config Realm for the application
+        Realm.init(this);
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+                .name("regionsTest.realm")
+                .build();
+
+        Realm.setDefaultConfiguration(realmConfiguration);
 
     }
 
@@ -164,9 +174,9 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
             case R.id.weatherforecast:
                 Intent launchNewIntent2 = new Intent(this,WeatherForecastActivity.class);
                 startActivityForResult(launchNewIntent2, 0);
-            case R.id.activitylist:
-                Intent launchNewIntent3 = new Intent(this,ListRegion.class);
-                startActivityForResult(launchNewIntent3, 0);
+//            case R.id.activitylist:
+//                Intent launchNewIntent3 = new Intent(this,ListRegion.class);
+//                startActivityForResult(launchNewIntent3, 0);
             default:
                 return super.onOptionsItemSelected(item);
         }

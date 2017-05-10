@@ -31,7 +31,9 @@
 
         <!--<activity android:name=".LoginWithGoogle"/>-->
         <activity android:name=".WeatherForecastActivity"/>
-        <activity android:name=".ListRegion" />
+        <!--<activity android:name=".ListRegion" />-->
+
+
     </application>
 
 </manifest>
