@@ -56,5 +56,4 @@ public class Region extends RealmObject{
     public void setOffice(String office) {
         this.office = office;
     }
-
 }

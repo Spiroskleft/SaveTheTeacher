@@ -28,7 +28,6 @@ public class RealmImporter {
     public void importFromJson(){
         Realm realm = Realm.getDefaultInstance();
 
-        //transaction timer
 
         realm.executeTransaction(new Realm.Transaction() {
             @Override

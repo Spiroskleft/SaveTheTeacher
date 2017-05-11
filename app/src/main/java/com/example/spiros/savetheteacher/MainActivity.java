@@ -29,11 +29,15 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.example.spiros.savetheteacher.Realm.Region;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -41,30 +45,42 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
     //adapter class
     ArrayList<AdapterItems> listnewsData = new ArrayList<AdapterItems>();
-    int StartFrom = 0;
-    int UserOperation = SearchType.MyFollowing; // 0 my followers post 2- specifc user post 3- search post
-    String Searchquery;
-    int totalItemCountVisible = 0; //totalItems visible
-    LinearLayout ChannelInfo;
-    TextView txtnamefollowers;
-    int SelectedUserID = 0;
-    Button buFollow;
-    MyCustomAdapter myadapter;
+    private int StartFrom = 0;
+    private int UserOperation = SearchType.MyFollowing; // 0 my followers post 2- specifc user post 3- search post
+    private String Searchquery;
+    private int totalItemCountVisible = 0; //totalItems visible
+    private LinearLayout ChannelInfo;
+    private TextView txtnamefollowers;
+    private int SelectedUserID = 0;
+    private Button buFollow;
+    private MyCustomAdapter myadapter;
+
+    private Button importbtn ;
+
+    private List<Region>  regionList  = new ArrayList<>();
+    private RealmResults<Region> regionRealmList;
+    private Realm realm ;
+
+
+
 
 
     @Override
@@ -90,14 +106,113 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
         lsNews.setAdapter(myadapter);// with data
         LoadTweets(0,SearchType.MyFollowing);
 
-        //Config Realm for the application
-        Realm.init(this);
-        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
-                .name("regionsTest.realm")
-                .build();
 
-        Realm.setDefaultConfiguration(realmConfiguration);
 
+        // Εισαγωγή κουμπιού για να φορτώσουμε στο Realm το JSON αρχείο
+        importbtn = (Button) findViewById(R.id.importbtn);
+        importbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                RealmImporter realmImporter = new RealmImporter(getResources());
+//                realmImporter.importFromJson();
+
+
+                InputStream inputStream = getResources().openRawResource(getResources().getIdentifier("perioxes","raw", getPackageName()));
+             //   InputStream inputStream = getResources().getSystem().openRawResource(R.raw.perioxes);
+                String sxml = readTextFile(inputStream);
+                System.out.println("----------------------->"+sxml);
+//                InputStream inputStream = context.openRawResource(R.raw.perioxes);
+//                try {
+////                    realm.createAllFromJson(Region.class, inputStream);
+//
+//
+//                } catch (Exception e){
+//                    realm.cancelTransaction();
+//                } finally {
+//                    if(realm != null) {
+//                        realm.close();
+//                    }
+//                }
+//                Log.d("bravo","pame gera");
+
+                //Αρχικοποιούμε τον json αντικείμενο
+                Gson gson = new Gson();
+
+                //Κάνουμε τα κατάλληλα Cast για να μας επιστρέψει την List που θέλουμε
+                Type type = new TypeToken<List<Region>>() {
+                }.getType();
+//                System.out.println(output);
+                //Μετατρέπουμε το Json σε List<Applicationn>
+                try {
+                    regionList = gson.fromJson(sxml, type);
+
+                    realm = Realm.getDefaultInstance() ;
+
+                for (int i=0;i<regionList.size();i++) {
+
+                    Region region = new Region();
+                    region = regionList.get(i);
+
+                    realm.beginTransaction();
+                    realm.copyToRealm(region);
+                    realm.commitTransaction();
+                }
+
+                } catch (IllegalStateException | JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+
+
+
+
+
+                regionRealmList= realm.where(Region.class)
+      //                  .equalTo("Id",1)
+                        .findAll();
+
+                System.out.println("----->"+regionRealmList.size());
+
+                System.out.println("----->"+regionRealmList.get(1).getSubName());
+
+
+
+
+
+            }
+        });
+
+//        Button countbtn = (Button) findViewById(R.id.count);
+//        countbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                realm = Realm.getDefaultInstance();
+//
+//                int people = realm.where(People.class).findAll().size();
+//                if (people>0) {
+//                    Snackbar.make(view, "Found: " + people + " people in the database", Snackbar.LENGTH_LONG).show();
+//                }else {
+//                    Snackbar.make(view, "Found no people in the database!", Snackbar.LENGTH_LONG).show();
+//                }
+//
+//            }
+//        });
+
+    }
+    public String readTextFile(InputStream inputStream) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        byte buf[] = new byte[1024];
+        int len;
+        try {
+            while ((len = inputStream.read(buf)) != -1) {
+                outputStream.write(buf, 0, len);
+            }
+            outputStream.close();
+            inputStream.close();
+        } catch (IOException e) {
+
+        }
+        return outputStream.toString();
     }
 
     public void buFollowers(View view) {
@@ -531,6 +646,8 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
 
 
     }
+
+
 
 //    public void WeatherActivity(View view) {
 //        Intent intent = new Intent(this, WeatherActivity.class);

@@ -225,7 +225,7 @@ public class Login extends AppCompatActivity {
                     LoadImage();// init the contact list
                 } else {
                     // Permission Denied
-                    Toast.makeText(this, "your message", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT)
                             .show();
                 }
                 break;
