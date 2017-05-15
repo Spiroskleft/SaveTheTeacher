@@ -30,6 +30,8 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.spiros.savetheteacher.Realm.Region;
+import com.example.spiros.savetheteacher.Weather.WeatherActivity;
+import com.example.spiros.savetheteacher.Weather.WeatherForecastActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -412,7 +414,7 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
 
 
     //load image
-    //pop
+
 
     @VisibleForTesting
     public ProgressDialog mProgressDialog;

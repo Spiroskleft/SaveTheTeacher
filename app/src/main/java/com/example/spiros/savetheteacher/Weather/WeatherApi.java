@@ -1,4 +1,4 @@
-package com.example.spiros.savetheteacher;
+package com.example.spiros.savetheteacher.Weather;
 
 /**
  * Created by Spiros on 13/4/2017.

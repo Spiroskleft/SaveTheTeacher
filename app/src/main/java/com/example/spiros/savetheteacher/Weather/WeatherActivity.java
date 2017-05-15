@@ -1,4 +1,4 @@
-package com.example.spiros.savetheteacher;
+package com.example.spiros.savetheteacher.Weather;
 
 /**
  * Created by Spiros on 13/4/2017.
@@ -6,7 +6,6 @@ package com.example.spiros.savetheteacher;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -20,6 +19,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.spiros.savetheteacher.R;
 
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;

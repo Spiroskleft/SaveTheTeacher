@@ -1,11 +1,11 @@
-package com.example.spiros.savetheteacher.Services;
+package com.example.spiros.savetheteacher.Weather.Services;
 
 /**
  * Created by Spiros on 17/4/2017.
  */
 
-import com.example.spiros.savetheteacher.Models.CurrentWeather;
-import com.example.spiros.savetheteacher.Models.WeatherForecast;
+import com.example.spiros.savetheteacher.Weather.Models.CurrentWeather;
+import com.example.spiros.savetheteacher.Weather.Models.WeatherForecast;
 import com.google.gson.annotations.SerializedName;
 
 import org.apache.http.HttpException;

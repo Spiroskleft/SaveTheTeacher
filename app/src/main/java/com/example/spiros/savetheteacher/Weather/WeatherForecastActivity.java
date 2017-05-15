@@ -1,4 +1,4 @@
-package com.example.spiros.savetheteacher;
+package com.example.spiros.savetheteacher.Weather;
 
 /**
  * Created by Spiros on 17/4/2017.
@@ -19,12 +19,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.spiros.savetheteacher.Helpers.DayFormatter;
-import com.example.spiros.savetheteacher.Helpers.TemperatureFormatter;
-import com.example.spiros.savetheteacher.Models.CurrentWeather;
-import com.example.spiros.savetheteacher.Models.WeatherForecast;
-import com.example.spiros.savetheteacher.Services.LocationService;
-import com.example.spiros.savetheteacher.Services.WeatherService;
+import com.example.spiros.savetheteacher.Weather.Helpers.DayFormatter;
+import com.example.spiros.savetheteacher.Weather.Helpers.TemperatureFormatter;
+import com.example.spiros.savetheteacher.Weather.Models.CurrentWeather;
+import com.example.spiros.savetheteacher.Weather.Models.WeatherForecast;
+import com.example.spiros.savetheteacher.R;
+import com.example.spiros.savetheteacher.Weather.Services.LocationService;
+import com.example.spiros.savetheteacher.Weather.Services.WeatherService;
 
 import org.apache.http.HttpException;
 

@@ -46,6 +46,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Created by Spiroskleft@gmail.com on 8/5/2017.
+ * */
+
 public class Login extends AppCompatActivity {
     EditText etName;
     EditText etEmail;
@@ -61,6 +65,7 @@ public class Login extends AppCompatActivity {
     // [END declare_auth]
 
     // [START declare_auth_listener]
+    // Ορίζουμε τον Listener
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
@@ -109,12 +114,12 @@ public class Login extends AppCompatActivity {
 // user login
         showProgressDialog();
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        // Create a storage reference from our app
+        // Δημιουργούμε ένα storage reference από το firebase
         StorageReference storageRef = storage.getReferenceFromUrl("gs://savetheteacherapp-55d47.appspot.com");
         DateFormat df = new SimpleDateFormat("ddMMyyHHmmss");
         Date dateobj = new Date();
         // System.out.println(df.format(dateobj));
-// Create a reference to "mountains.jpg"
+        // Create a reference to "mountains.jpg"
         final String ImagePath = df.format(dateobj) + ".jpg";
         StorageReference mountainsRef = storageRef.child("images/" + ImagePath);
         ivUserImage.setDrawingCacheEnabled(true);
@@ -123,6 +128,7 @@ public class Login extends AppCompatActivity {
         BitmapDrawable drawable = (BitmapDrawable) ivUserImage.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
@@ -147,8 +153,8 @@ public class Login extends AppCompatActivity {
                 }
                 //TODO:  login and register
                 String url = "http://83.212.102.247:8083/twitterserver/register.php?first_name=" + name + "&email=" + etEmail.getText().toString() + "&password=" + etPassword.getText().toString() + "&picture_path=" + downloadUrl;
-// gia okeanos: 83.212.102.247:8083
-                //gia topika: 10.0.2.2:8083
+                // gia okeanos: 83.212.102.247:8083
+                // gia topika: 10.0.2.2:8083
                 new MyAsyncTaskgetNews().execute(url);
                 hideProgressDialog();
 

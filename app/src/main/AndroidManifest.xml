@@ -25,13 +25,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".WeatherActivity"
+            android:name=".Weather.WeatherActivity"
             android:label="@string/app_name" />
 
         <activity android:name=".Login"/>
 
         <!--<activity android:name=".LoginWithGoogle"/>-->
-        <activity android:name=".WeatherForecastActivity"/>
+        <activity android:name=".Weather.WeatherForecastActivity"/>
         <!--<activity android:name=".ListRegion" />-->
 
 
