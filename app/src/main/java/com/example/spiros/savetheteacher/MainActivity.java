@@ -63,6 +63,7 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
+
     //adapter class
     ArrayList<AdapterItems> listnewsData = new ArrayList<AdapterItems>();
     private int StartFrom = 0;
@@ -75,11 +76,13 @@ public class MainActivity extends AppCompatActivity {
     private Button buFollow;
     private MyCustomAdapter myadapter;
 
+    //------------------------------------------------------------------------------------------
+    //Κουμπί για να εισάγουμε στη Realm το JSON αρχείο + Φτιάξιμο της λίστας από το Realm
     private Button importbtn ;
-
     private List<Region>  regionList  = new ArrayList<>();
     private RealmResults<Region> regionRealmList;
     private Realm realm ;
+    //------------------------------------------------------------------------------------------
 
 
 
@@ -97,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
        SaveSettings saveSettings = new SaveSettings(getApplicationContext());
         saveSettings.LoadData();
 
-        //set the adapter
-listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
+        //Ορίζουμε τον adapter για τα news
+        listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
 //        listnewsData.add(new AdapterItems(null,null,null,"loading",null,null,null));
 //        listnewsData.add(new AdapterItems(null,null,null,"notweet",null,null,null));
 //        listnewsData.add(new AdapterItems(null,null,null,"lalala",null,null,null));
@@ -109,33 +112,20 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
         LoadTweets(0,SearchType.MyFollowing);
 
 
+        //------------------------------------------------------------------------------------------
 
         // Εισαγωγή κουμπιού για να φορτώσουμε στο Realm το JSON αρχείο
         importbtn = (Button) findViewById(R.id.importbtn);
         importbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                RealmImporter realmImporter = new RealmImporter(getResources());
-//                realmImporter.importFromJson();
+
 
 
                 InputStream inputStream = getResources().openRawResource(getResources().getIdentifier("perioxes","raw", getPackageName()));
-             //   InputStream inputStream = getResources().getSystem().openRawResource(R.raw.perioxes);
                 String sxml = readTextFile(inputStream);
                 System.out.println("----------------------->"+sxml);
-//                InputStream inputStream = context.openRawResource(R.raw.perioxes);
-//                try {
-////                    realm.createAllFromJson(Region.class, inputStream);
-//
-//
-//                } catch (Exception e){
-//                    realm.cancelTransaction();
-//                } finally {
-//                    if(realm != null) {
-//                        realm.close();
-//                    }
-//                }
-//                Log.d("bravo","pame gera");
+
 
                 //Αρχικοποιούμε τον json αντικείμενο
                 Gson gson = new Gson();
@@ -156,7 +146,7 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
                     region = regionList.get(i);
 
                     realm.beginTransaction();
-                    realm.copyToRealm(region);
+                    realm.copyToRealmOrUpdate(region);
                     realm.commitTransaction();
                 }
 
@@ -176,30 +166,16 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
 
                 System.out.println("----->"+regionRealmList.get(1).getSubName());
 
-
+            //   String regionsss =regionList.toString() ;
 
 
 
             }
         });
 
-//        Button countbtn = (Button) findViewById(R.id.count);
-//        countbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                realm = Realm.getDefaultInstance();
-//
-//                int people = realm.where(People.class).findAll().size();
-//                if (people>0) {
-//                    Snackbar.make(view, "Found: " + people + " people in the database", Snackbar.LENGTH_LONG).show();
-//                }else {
-//                    Snackbar.make(view, "Found no people in the database!", Snackbar.LENGTH_LONG).show();
-//                }
-//
-//            }
-//        });
-
     }
+    //------------------------------------------------------------------------------------------
+
     public String readTextFile(InputStream inputStream) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -217,9 +193,10 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
         return outputStream.toString();
     }
 
+    //Μέθοδος για τους followers
     public void buFollowers(View view) {
 
-// subscribe and un subscribe
+    // subscribe and un subscribe
 
         int Operation; // 1- subsribe 2- unsubscribe
         String Follow=buFollow.getText().toString();
@@ -238,6 +215,9 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
     }
 
 
+    //------------------------------------------------------------------------------------------
+
+    // Δημιουργούμε το search bar στο menu
     SearchView searchView;
     Menu myMenu;
 
@@ -263,7 +243,7 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
 
                 }
                 // search in posts
-                LoadTweets(0,SearchType.SearchIn);// seearch
+                LoadTweets(0,SearchType.SearchIn);// search
                 return false;
             }
 
@@ -275,7 +255,10 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
         //   searchView.setOnCloseListener(this);
         return true;
     }
+    //------------------------------------------------------------------------------------------
 
+
+    // Επιλογή από το Menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -298,8 +281,10 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
                 return super.onOptionsItemSelected(item);
         }
     }
+    //------------------------------------------------------------------------------------------
 
 
+    // O adapter για την list των news
     private class MyCustomAdapter extends BaseAdapter {
         public ArrayList<AdapterItems> listnewsDataAdpater;
         Context context;
@@ -325,6 +310,9 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
             return position;
         }
 
+        //------------------------------------------------------------------------------------------
+
+        // Δημιουργία των tweets
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -400,7 +388,9 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
 
                 TextView txt_tweet_date = (TextView) myView.findViewById(R.id.txt_tweet_date);
                 txt_tweet_date.setText(s.tweet_date);
-//Picasso
+
+        // Χρησιμοποίηση του Picasso για εισαγωγή φωτό στο tweet.
+
                 ImageView tweet_picture = (ImageView) myView.findViewById(R.id.tweet_picture);
                   Picasso.with(context).load(s.tweet_picture).into(tweet_picture);
                 ImageView picture_path = (ImageView) myView.findViewById(R.id.picture_path);
@@ -411,9 +401,10 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
 
 
     }
+    //------------------------------------------------------------------------------------------
 
 
-    //load image
+    // Δημιουργία progress κύκλου για απεικόνιση κατά τη διάρκεια του loading
 
 
     @VisibleForTesting
@@ -435,8 +426,9 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
         }
     }
 
+    //------------------------------------------------------------------------------------------
 
-    //save image
+    // Αποθήκευση εικόνας στο FireBase
     int RESULT_LOAD_IMAGE=233;
     void LoadImage(){
         Intent i = new Intent(
@@ -466,6 +458,7 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
     }
     String downloadUrl=null;
     // ImageView postImage = new ImageView(this);
+    // στο FireBase
     public void uploadimage(Bitmap bitmap ) {
         showProgressDialog();
         FirebaseStorage storage=FirebaseStorage.getInstance();
@@ -501,6 +494,8 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
             }
         });
     }
+    //------------------------------------------------------------------------------------------
+
     // get news from server
     public class MyAsyncTaskgetNews extends AsyncTask<String, String, String> {
         @Override
@@ -619,6 +614,8 @@ listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
 
 
     }
+    //------------------------------------------------------------------------------------------
+
     void LoadTweets(int StartFrom,int UserOperation){
         this.StartFrom=StartFrom;
         this.UserOperation=UserOperation;

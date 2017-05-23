@@ -26,6 +26,8 @@ public class RealmImporter {
     }
 
     public void importFromJson(){
+
+        // Αρχικοποίηση του Realm
         Realm realm = Realm.getDefaultInstance();
 
 
