@@ -95,9 +95,10 @@ public class Login extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
+             //   Log.d("lalala",user.getUid().toString());
 
-                    startActivity(new Intent(Login.this, MainActivity.class));
+                if (user != null) {
+
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
@@ -219,7 +220,7 @@ public class Login extends AppCompatActivity {
 
     }
 
-    //get acces to location permsion
+    //get access to location permsion
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
 
