@@ -18,12 +18,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.spiros.savetheteacher.GoogleSignIn.SignInActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,18 +45,17 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.example.spiros.savetheteacher.GoogleSignIn.SignInActivity.acct;
+
 /**
- * Created by Spiroskleft@gmail.com on 8/5/2017.
- * */
+ * Created by Spiros on 16/6/2017.
+ */
 
-public class Login extends AppCompatActivity {
-    EditText etName;
-    EditText etEmail;
-    EditText etPassword;
+public class LoginWithGoogleSignIn extends AppCompatActivity {
+    private String etName;
+    private String etEmail;
+    private String etPassword;
     ImageView ivUserImage;
-
-    Button sign_in_button;
-
 
 
     private static final String TAG = "AnonymousAuth";
@@ -76,16 +72,16 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_login);
-        etName = (EditText) findViewById(R.id.etName);
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etPassword = (EditText) findViewById(R.id.etPassword);
+        setContentView(R.layout.activity_login_after_google_sign_in);
+        etName = acct.getDisplayName();
+        etEmail = acct.getEmail();
+        etPassword = acct.getId();
         ivUserImage = (ImageView) findViewById(R.id.ivUserImage);
         ivUserImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 // load photo from gallery
-                CheckUserPermsions();
+                CheckUserPermisions2();
             }
 
         });
@@ -100,7 +96,6 @@ public class Login extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-             //   Log.d("lalala",user.getUid().toString());
 
                 if (user != null) {
 
@@ -116,7 +111,7 @@ public class Login extends AppCompatActivity {
     }
 
 
-    public void buLogin(View view) {
+    public void buLogin2(View view) {
 // user login
         showProgressDialog();
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -152,16 +147,16 @@ public class Login extends AppCompatActivity {
                 String name = "";
                 try {
                     //for space with name
-                    name = java.net.URLEncoder.encode(etName.getText().toString(), "UTF-8");
+                    name = java.net.URLEncoder.encode(etName, "UTF-8");
                     downloadUrl = java.net.URLEncoder.encode(downloadUrl, "UTF-8");
                 } catch (UnsupportedEncodingException e) {
 
                 }
                 //TODO:  login and register
-                String url = "http://83.212.102.247:8083/twitterserver/register.php?first_name=" + name + "&email=" + etEmail.getText().toString() + "&password=" + etPassword.getText().toString() + "&picture_path=" + downloadUrl;
+                String url = "http://83.212.102.247:8083/twitterserver/register.php?first_name=" + name + "&email=" + etEmail+ "&password=" + etPassword + "&picture_path=" + downloadUrl;
                 // gia okeanos: 83.212.102.247:8083
                 // gia topika: 10.0.2.2:8083
-                new MyAsyncTaskgetNews().execute(url);
+                new MyAsyncTaskgetNews2().execute(url);
                 hideProgressDialog();
 
             }
@@ -174,7 +169,7 @@ public class Login extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
-        signInAnonymously();
+        signInAnonymously2();
     }
     // [END on_start_add_listener]
 
@@ -188,7 +183,7 @@ public class Login extends AppCompatActivity {
         hideProgressDialog();
     }
 
-    private void signInAnonymously() {
+    private void signInAnonymously2() {
         // [START signin_anonymously]
         mAuth.signInAnonymously()
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -210,7 +205,7 @@ public class Login extends AppCompatActivity {
     }
 
 
-    void CheckUserPermsions() {
+    void CheckUserPermisions2() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) !=
                     PackageManager.PERMISSION_GRANTED) {
@@ -287,7 +282,7 @@ public class Login extends AppCompatActivity {
             }
 
             Bitmap t = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(picturePath), outWidth, outHeight, false);
-           // Bitmap t = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(picturePath),250,250,false);
+            // Bitmap t = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(picturePath),250,250,false);
             ivUserImage.setImageBitmap(t);
 
         }
@@ -319,7 +314,7 @@ public class Login extends AppCompatActivity {
     }
 
     // get news from server
-    public class MyAsyncTaskgetNews extends AsyncTask<String, String, String> {
+    public class MyAsyncTaskgetNews2 extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
             //before works
@@ -365,9 +360,9 @@ public class Login extends AppCompatActivity {
                 if (json.getString("msg").equalsIgnoreCase("user is added")) {
                     Toast.makeText(getApplicationContext(), json.getString("msg"), Toast.LENGTH_LONG).show();
 //login
-                    String url = "http://83.212.102.247:8083/twitterserver/login.php?email=" + etEmail.getText().toString() + "&password=" + etPassword.getText().toString();
+                    String url = "http://83.212.102.247:8083/twitterserver/login.php?email=" + etEmail+ "&password=" + etPassword;
 
-                    new MyAsyncTaskgetNews().execute(url);
+                    new MyAsyncTaskgetNews2().execute(url);
                 }
 
                 if (json.getString("msg").equalsIgnoreCase("Pass Login")) {
@@ -378,6 +373,7 @@ public class Login extends AppCompatActivity {
                     SaveSettings saveSettings = new SaveSettings(getApplicationContext());
                     saveSettings.SaveData(UserCreintal.getString("user_id"));
                     finish(); //close this activity
+                    gotoMainActivity();
                 }
 
             } catch (Exception ex) {
@@ -394,13 +390,11 @@ public class Login extends AppCompatActivity {
 
 
     }
-    public void gotoGoogleSignIn(View view) {
-        Intent ki = new Intent(this, SignInActivity.class);
+
+    public void gotoMainActivity() {
+        Intent ki = new Intent(this, MainActivity.class);
         startActivity(ki);
         System.out.println("---------------------");
     }
-
-
-
 
 }

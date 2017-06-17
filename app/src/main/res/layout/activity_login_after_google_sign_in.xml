@@ -8,38 +8,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Login">
+    tools:context=".LoginWithGoogleSignIn">
 
     <LinearLayout
         android:gravity="center"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <EditText
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Enter your name"
-            android:ems="10"
-            android:id="@+id/etName" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:ems="10"
-            android:id="@+id/etEmail"
-            android:hint="enter email" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/etPassword"
-            android:hint="enter password" />
 
         <ImageView
             android:background="@drawable/background"
@@ -60,26 +35,13 @@
         <Button
             android:layout_width="195px"
             android:layout_height="60dp"
-            android:text="Login"
-            android:id="@+id/bulogin"
-             android:background="@drawable/barcolor"
-             android:paddingRight="5dp"
+            android:text="Save The Teacher"
+            android:id="@+id/bulogin2"
+            android:background="@drawable/barcolor"
+            android:paddingRight="5dp"
             android:textSize="10dp"
             android:textColor="#fdfffa"
-            android:onClick="buLogin" />
-
-        <Button
-            android:id="@+id/sign_in_button"
-            android:text="Google Sign In"
-            android:textSize="10dp"
-            android:layout_alignParentTop="true"
-            android:textColor="#5ef2c6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/barcolor"
-            android:onClick="gotoGoogleSignIn"
-            />
-
+            android:onClick="buLogin2" />
 
     </LinearLayout>
 </RelativeLayout>

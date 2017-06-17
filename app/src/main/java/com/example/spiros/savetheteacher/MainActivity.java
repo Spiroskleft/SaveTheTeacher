@@ -64,6 +64,7 @@ import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
 
+
     //adapter class
     ArrayList<AdapterItems> listnewsData = new ArrayList<AdapterItems>();
     private int StartFrom = 0;
