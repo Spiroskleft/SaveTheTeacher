@@ -68,9 +68,12 @@
             android:id="@+id/button5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Go to main"
+            android:layout_weight="0.23"
+            android:fontFamily="casual"
             android:onClick="gotoMain"
-            android:layout_weight="0.23" />
+            android:text="Save The Teacher Main"
+            android:textAlignment="center"
+            android:textColor="@color/darkgreen" />
 
     </LinearLayout>
 

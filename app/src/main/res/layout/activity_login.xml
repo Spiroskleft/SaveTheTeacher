@@ -68,18 +68,31 @@
             android:textColor="#fdfffa"
             android:onClick="buLogin" />
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:text="or"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
         <Button
             android:id="@+id/sign_in_button"
-            android:text="Google Sign In"
             android:layout_width="195px"
             android:layout_height="60dp"
-            android:textSize="10dp"
             android:layout_alignParentTop="true"
             android:layout_marginBottom="2dp"
-            android:textColor="#5ef2c6"
             android:background="@drawable/barcolor"
+            android:fontFamily="sans-serif"
             android:onClick="gotoGoogleSignIn"
-            />
+            android:text="Google Sign In"
+            android:textAlignment="center"
+            android:textColor="@color/green"
+            android:textSize="10sp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
