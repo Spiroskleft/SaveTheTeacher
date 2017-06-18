@@ -158,8 +158,8 @@ public class Login extends AppCompatActivity {
 
                 }
                 //TODO:  login and register
-                String url = "http://83.212.102.247:8083/twitterserver/register.php?first_name=" + name + "&email=" + etEmail.getText().toString() + "&password=" + etPassword.getText().toString() + "&picture_path=" + downloadUrl;
-                // gia okeanos: 83.212.102.247:8083
+                String url = "http://83.212.99.161:8083/twitterserver/register.php?first_name=" + name + "&email=" + etEmail.getText().toString() + "&password=" + etPassword.getText().toString() + "&picture_path=" + downloadUrl;
+                // gia okeanos: 83.212.102.247:8083 δεύτερος server
                 // gia topika: 10.0.2.2:8083
                 new MyAsyncTaskgetNews().execute(url);
                 hideProgressDialog();
@@ -365,7 +365,7 @@ public class Login extends AppCompatActivity {
                 if (json.getString("msg").equalsIgnoreCase("user is added")) {
                     Toast.makeText(getApplicationContext(), json.getString("msg"), Toast.LENGTH_LONG).show();
 //login
-                    String url = "http://83.212.102.247:8083/twitterserver/login.php?email=" + etEmail.getText().toString() + "&password=" + etPassword.getText().toString();
+                    String url = "http://83.212.99.161:8083/twitterserver/login.php?email=" + etEmail.getText().toString() + "&password=" + etPassword.getText().toString();
 
                     new MyAsyncTaskgetNews().execute(url);
                 }

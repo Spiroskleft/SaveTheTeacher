@@ -149,13 +149,6 @@ android:src="@drawable/ic_account_circle_black_24dp"
             android:layout_height="wrap_content"
             android:id="@+id/importbtn"
             style="@android:style/Widget.Button" />
-        <Button
-            android:text="1st region"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/viewname"
-            style="@android:style/Widget.Button" />
-
 
 
     </LinearLayout>
