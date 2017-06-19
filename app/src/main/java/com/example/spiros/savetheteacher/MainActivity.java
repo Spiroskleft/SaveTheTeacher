@@ -29,7 +29,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.example.spiros.savetheteacher.Realm.Region;
+import com.example.spiros.savetheteacher.Realm.RegionsListActivity;
 import com.example.spiros.savetheteacher.Weather.WeatherActivity;
 import com.example.spiros.savetheteacher.Weather.WeatherForecastActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,9 +37,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -47,20 +44,14 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import io.realm.Realm;
-import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,9 +71,6 @@ public class MainActivity extends AppCompatActivity {
     //------------------------------------------------------------------------------------------
     //Κουμπί για να εισάγουμε στη Realm το JSON αρχείο + Φτιάξιμο της λίστας από το Realm
     private Button importbtn ;
-    private List<Region>  regionList  = new ArrayList<>();
-    private RealmResults<Region> regionRealmList;
-    private Realm realm ;
     //------------------------------------------------------------------------------------------
 
 
@@ -121,78 +109,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-
-                InputStream inputStream = getResources().openRawResource(getResources().getIdentifier("perioxes","raw", getPackageName()));
-                String sxml = readTextFile(inputStream);
-                System.out.println("----------------------->"+sxml);
-
-
-                //Αρχικοποιούμε τον json αντικείμενο
-                Gson gson = new Gson();
-
-                //Κάνουμε τα κατάλληλα Cast για να μας επιστρέψει την List που θέλουμε
-                Type type = new TypeToken<List<Region>>() {
-                }.getType();
-//                System.out.println(output);
-                //Μετατρέπουμε το Json σε List<Applicationn>
-                try {
-                    regionList = gson.fromJson(sxml, type);
-
-                    realm = Realm.getDefaultInstance() ;
-
-                for (int i=0;i<regionList.size();i++) {
-
-                    Region region = new Region();
-                    region = regionList.get(i);
-
-                    realm.beginTransaction();
-                    realm.copyToRealmOrUpdate(region);
-                    realm.commitTransaction();
-                }
-
-                } catch (IllegalStateException | JsonSyntaxException e) {
-                    e.printStackTrace();
-                }
-
-
-
-
-
-                regionRealmList= realm.where(Region.class)
-      //                  .equalTo("Id",1)
-                        .findAll();
-
-                System.out.println("----->"+regionRealmList.size());
-
-                System.out.println("----->"+regionRealmList.get(1).getSubName());
-
-            //   String regionsss =regionList.toString() ;
-
-
-
+                gotoRegionList();
             }
         });
 
     }
+
+
     //------------------------------------------------------------------------------------------
 
-    public String readTextFile(InputStream inputStream) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-        byte buf[] = new byte[1024];
-        int len;
-        try {
-            while ((len = inputStream.read(buf)) != -1) {
-                outputStream.write(buf, 0, len);
-            }
-            outputStream.close();
-            inputStream.close();
-        } catch (IOException e) {
-
-        }
-        return outputStream.toString();
-    }
 
     //Μέθοδος για τους followers
     public void buFollowers(View view) {
@@ -448,6 +373,7 @@ public class MainActivity extends AppCompatActivity {
 
             Cursor cursor = getContentResolver().query(selectedImage,
                     filePathColumn, null, null, null);
+            assert cursor != null;
             cursor.moveToFirst();
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
@@ -647,6 +573,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void gotoRegionList() {
+        Intent intent100 = new Intent(this, RegionsListActivity.class);
+        startActivity(intent100);
+    }
+
+//    public void gotoRegionList() {
+//        Intent intent100 = new Intent(this, RegionsActivity.class);
+//        startActivity(intent100);
+//    }
 
 
 //    public void WeatherActivity(View view) {

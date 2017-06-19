@@ -169,6 +169,7 @@ public class WeatherForecastActivity extends Activity {
                 final WeatherForecast weatherForecast = (WeatherForecast) getItem(position);
 
                 final DayFormatter dayFormatter = new DayFormatter(getActivity());
+                assert weatherForecast != null;
                 final String day = dayFormatter.format(weatherForecast.getTimestamp());
                 viewHolder.dayTextView.setText(day);
                 viewHolder.descriptionTextView.setText(weatherForecast.getDescription());

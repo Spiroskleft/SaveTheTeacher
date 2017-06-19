@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Realm.RegionsActivity"
+
+    android:weightSum="4">
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="405dp"
+        android:layout_height="40dp"
+        android:textColor="@color/white"
+        android:text="Περιοχές"
+        android:gravity="center_vertical|center_horizontal"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_weight="2"
+        />
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingLeft="16dp"-->
+        <!--android:paddingRight="16dp"-->
+        <!--android:weightSum="2">-->
+
+    <!--</LinearLayout>-->
+    <ListView
+        android:id="@+id/regionsList1"
+        android:layout_width="382dp"
+        android:layout_height="442dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="2" />
+</LinearLayout>

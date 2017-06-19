@@ -130,6 +130,7 @@ public class SignInActivity extends AppCompatActivity implements
             String username = "";
             String password = "";
 
+            assert acct != null;
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
 
             updateUI(true);

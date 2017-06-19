@@ -36,6 +36,8 @@
 
         <activity android:name=".Weather.WeatherForecastActivity"/>
         <!--<activity android:name=".ListRegion" />-->
+        <activity android:name=".Realm.RegionsListActivity"/>
+        <activity android:name=".Realm.RegionsActivity"/>
 
 
 
