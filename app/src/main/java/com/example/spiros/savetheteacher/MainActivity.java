@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
     //Κουμπί για να εισάγουμε στη Realm το JSON αρχείο + Φτιάξιμο της λίστας από το Realm
     private Button importbtn ;
     //------------------------------------------------------------------------------------------
-
-
+private Bitmap bitmap ;
+    private ImageView mImageView;
 
 
 
@@ -382,14 +382,30 @@ public class MainActivity extends AppCompatActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
+
             // postImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
             uploadimage( BitmapFactory.decodeFile(picturePath));
+            final int maxSize = 960;
+            int outWidth;
+            int outHeight;
+            int inWidth = BitmapFactory.decodeFile(picturePath).getWidth();
+            int inHeight = BitmapFactory.decodeFile(picturePath).getHeight();
+            if (inWidth > inHeight) {
+                outWidth = maxSize;
+                outHeight = (inHeight * maxSize) / inWidth;
+            } else {
+                outHeight = maxSize;
+                outWidth = (inWidth * maxSize) / inHeight;
+            }
+            bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(picturePath), outWidth, outHeight, false);
+//            mImageView.setImageBitmap(bitmap);
+            uploadimage(bitmap);
         }
     }
     String downloadUrl=null;
     // ImageView postImage = new ImageView(this);
     // στο FireBase
-    public void uploadimage(Bitmap bitmap ) {
+    public void uploadimage(Bitmap bitmap2 ) {
         showProgressDialog();
         FirebaseStorage storage=FirebaseStorage.getInstance();
         // Create a storage reference from our app
@@ -400,13 +416,16 @@ public class MainActivity extends AppCompatActivity {
 // Create a reference to "mountains.jpg"
         String mydownloadUrl=SaveSettings.UserID+ "_"+ df.format(dateobj) +".jpg";
         StorageReference mountainsRef = storageRef.child("images/"+ mydownloadUrl);
+
         // postImage.setDrawingCacheEnabled(true);
         // postImage.buildDrawingCache();
         // Bitmap bitmap = imageView.getDrawingCache();
         // BitmapDrawable drawable=(BitmapDrawable)postImage.getDrawable();
         //  Bitmap bitmap =drawable.getBitmap();
+
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bitmap2.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
         UploadTask uploadTask = mountainsRef.putBytes(data);
