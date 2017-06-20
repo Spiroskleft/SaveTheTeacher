@@ -260,6 +260,7 @@ public class WeatherForecastActivity extends Activity {
                         public void onCompleted() {
                             mSwipeRefreshLayout.setRefreshing(false);
                             mAttributionTextView.setVisibility(View.VISIBLE);
+
                         }
 
                         @Override
