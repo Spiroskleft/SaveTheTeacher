@@ -7,13 +7,17 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -257,6 +261,7 @@ private Bitmap bitmap ;
 
 
                 ImageView iv_attach = (ImageView) myView.findViewById(R.id.iv_attach);
+
                 iv_attach.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -268,10 +273,14 @@ private Bitmap bitmap ;
                     @Override
                     public void onClick(View view) {
 
-                        String tweets=null;
+                        String tweets= "";
                         try {
                             //for space with name
                             tweets = java.net.URLEncoder.encode(  etPost.getText().toString() , "UTF-8");
+                            if (tweets == ""){
+                                tweets = java.net.URLEncoder.encode(  "Γειά σας Δάσκαλοι ... " , "UTF-8");
+                                Toast.makeText(MainActivity.this,"Καλύτερα πόσταρε κάτι δικό σου την απόμενη φορά !",Toast.LENGTH_LONG).show();
+                            }
                             downloadUrl= java.net.URLEncoder.encode(downloadUrl , "UTF-8");
                         } catch (UnsupportedEncodingException e) {
                             tweets=".";
@@ -384,7 +393,7 @@ private Bitmap bitmap ;
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            // postImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
 
             final int maxSize = 960;
             int outWidth;
@@ -399,14 +408,15 @@ private Bitmap bitmap ;
                 outWidth = (inWidth * maxSize) / inHeight;
             }
             bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(picturePath), outWidth, outHeight, false);
-           // mImageView.setImageBitmap(bitmap);
+
             uploadimage(bitmap);
-          // uploadimage( BitmapFactory.decodeFile(picturePath));
+
         }
 
     }
-    String downloadUrl=null;
-    // ImageView postImage = new ImageView(this);
+Uri uri = Uri.parse("android.resource://com.example.spiros.savetheteacher/" + R.drawable.schoolbus);
+    String downloadUrl= uri.toString();
+
     // στο FireBase
     public void uploadimage(Bitmap bitmap2 ) {
         showProgressDialog();
@@ -415,37 +425,57 @@ private Bitmap bitmap ;
         StorageReference storageRef = storage.getReferenceFromUrl("gs://savetheteacherapp-55d47.appspot.com");
         DateFormat df = new SimpleDateFormat("ddMMyyHHmmss");
         Date dateobj = new Date();
-        // System.out.println(df.format(dateobj));
-// Create a reference to "mountains.jpg"
+
         String mydownloadUrl=SaveSettings.UserID+ "_"+ df.format(dateobj) +".jpg";
         StorageReference mountainsRef = storageRef.child("images/"+ mydownloadUrl);
 
-        // postImage.setDrawingCacheEnabled(true);
-        // postImage.buildDrawingCache();
-        // Bitmap bitmap = imageView.getDrawingCache();
-        // BitmapDrawable drawable=(BitmapDrawable)postImage.getDrawable();
-        //  Bitmap bitmap =drawable.getBitmap();
 
+        if (bitmap2 != null) {
+            //Για να βάλω την φωτογραφία
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap2.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] data = baos.toByteArray();
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap2.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] data = baos.toByteArray();
+            UploadTask uploadTask = mountainsRef.putBytes(data);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle unsuccessful uploads
+                    Toast.makeText(MainActivity.this,"Something with uploading Picture",Toast.LENGTH_LONG).show();
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                    downloadUrl = taskSnapshot.getDownloadUrl().toString();
+                    hideProgressDialog();
+                }
+            });
+        } else {
+            //Αν δεν έχει βάλει καμία φωτογραφία η χρήστης βάζουμε εμείς μία
+            Drawable d = ResourcesCompat.getDrawableForDensity(getResources(), R.drawable.schoolbus, DisplayMetrics.DENSITY_XXHIGH, getTheme());
+            bitmap2 = ((BitmapDrawable) d).getBitmap();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap2.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] data = baos.toByteArray();
 
-        UploadTask uploadTask = mountainsRef.putBytes(data);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-               Toast.makeText(MainActivity.this,"Something with uploading Picture",Toast.LENGTH_LONG).show();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                downloadUrl = taskSnapshot.getDownloadUrl().toString();
-                hideProgressDialog();
-            }
-        });
+            UploadTask uploadTask = mountainsRef.putBytes(data);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle unsuccessful uploads
+                    Toast.makeText(MainActivity.this,"Something with uploading Picture",Toast.LENGTH_LONG).show();
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                    downloadUrl = taskSnapshot.getDownloadUrl().toString();
+                    hideProgressDialog();
+                }
+            });
+        }
+
     }
     //------------------------------------------------------------------------------------------
 

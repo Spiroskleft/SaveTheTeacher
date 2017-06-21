@@ -22,10 +22,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:fontFamily="casual"
-            android:text="Κάντε κλικ στην φωτό για να την αλλάξετε !"
+            android:text="@string/change_Photo"
             android:textAlignment="center"
             android:textColor="@color/darkgreen"
-            android:textSize="10sp"
+            android:textSize="13sp"
             android:typeface="normal" />
 
         <ImageView
@@ -47,7 +47,7 @@
         <Button
             android:layout_width="195px"
             android:layout_height="60dp"
-            android:text="Save The Teacher"
+            android:text="@string/Enter"
             android:id="@+id/bulogin2"
             android:background="@drawable/barcolor"
             android:paddingRight="5dp"

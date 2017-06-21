@@ -56,17 +56,20 @@
 
             <ImageView
 
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:id="@+id/iv_post"
                 android:layout_marginRight="8dp"
                 android:background="@drawable/ic_send_black_24dp" />
+
             <ImageView
 
-                android:layout_width="25dp"
-                android:layout_height="25dp"
                 android:id="@+id/iv_attach"
-                android:layout_marginRight="8dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+
+
+                android:layout_marginLeft="10dp"
                 android:background="@drawable/ic_attach_file_black_24dp" />
 
         </LinearLayout>

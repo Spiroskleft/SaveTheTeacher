@@ -144,7 +144,8 @@
         </RelativeLayout>
         <Button
             android:paddingTop="8dp"
-            android:text="Περιοχές"
+            android:text="@string/perioxes"
+            android:textColorHighlight="@color/red"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/importbtn"

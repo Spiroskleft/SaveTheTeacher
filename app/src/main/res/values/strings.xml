@@ -70,4 +70,10 @@
     <!-- Server Client ID.  This should be a valid Web OAuth 2.0 Client ID obtained
          from https://console.developers.google.com/ -->
     <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
+
+    <string name="welcome">Επιλέξτε τον τρόπο σύνδεσης στην εφαρμογή</string>
+    <string name="Save_The_Teacher">Save The Teacher</string>
+    <string name="Enter">Είσοδος</string>
+    <string name="change_Photo">Κάντε κλικ στην φωτό για να την αλλάξετε !</string>
+    <string name="perioxes">Περιοχές</string>
 </resources>
