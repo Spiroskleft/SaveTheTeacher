@@ -1,21 +1,21 @@
 <resources>
     <string name="app_name">Save The Teacher</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Επιλογές</string>
-    <string name="city">City: </string>
-    <string name="country">Country: </string>
-    <string name="coordinates">Coordinates: </string>
+    <string name="action_settings">Πίσω</string>
+    <string name="city">Πόλη: </string>
+    <string name="country">Χώρα: </string>
+    <string name="coordinates">Συντεταγμένες: </string>
     <string name="cod">COD: </string>
-    <string name="temperature">Temperature: </string>
-    <string name="sunrise">Sunrise: </string>
-    <string name="sunset">Sunset: </string>
-    <string name="attribution">Weather data by OpenWeatherMap.org</string>
-    <string name="error_fetch_weather">Could not fetch weather data</string>
-    <string name="error_location_unavailable">Could not get current location</string>
-    <string name="today">Today</string>
-    <string name="tomorrow">Tomorrow</string>
-    <string name="monday">Monday</string>
-    <string name="sky_is_clear">sky is clear</string>
+    <string name="temperature">Θερμοκρασία: </string>
+    <string name="sunrise">Ανατολή ηλίου: </string>
+    <string name="sunset">Δύση ηλίου: </string>
+    <string name="attribution">Στοιχεία καιρού από OpenWeatherMap.org</string>
+    <string name="error_fetch_weather">Δεν καταφέραμε να βρούμε στοιχεία για τον καιρό</string>
+    <string name="error_location_unavailable">Δεν καταφέραμε να βρούμε την τοποθεσία</string>
+    <string name="today">Σήμερα</string>
+    <string name="tomorrow">Αύριο</string>
+    <string name="monday">Δευτέρα</string>
+    <string name="sky_is_clear">αίθριος καιρός</string>
     <string name="nineteen_degrees">19°</string>
     <string name="fifteen_degrees">15°</string>
 
@@ -76,4 +76,9 @@
     <string name="Enter">Είσοδος</string>
     <string name="change_Photo">Κάντε κλικ στην φωτό για να την αλλάξετε !</string>
     <string name="perioxes">Περιοχές</string>
+    <string name="search_async">Αναζήτηση ασύγχρονα</string>
+    <string name="search_sync">Αναζήτηση</string>
+
+
+
 </resources>

@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="city,country" >
+        android:hint="εισάγετε πόλη,χώρα" >
         <requestFocus />
     </EditText>
 
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:onClick="expandWeatherSync"
             android:textColor="@color/appButtonTextColor"
-            android:text="Αναζήτηση" />
+            android:text="@string/search_sync" />
 
         <Button
             android:id="@+id/button2"
@@ -40,70 +40,79 @@
             android:layout_height="wrap_content"
             android:onClick="expandWeatherAsync"
             android:textColor="@color/appButtonTextColor"
-            android:text="Αναζητηση Async" />
+            android:text="@string/search_async" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/city_name_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:layout_centerInParent="true"
         android:layout_below="@+id/button_panel"/>
 
     <TextView
         android:id="@+id/country_name_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:layout_centerInParent="true"
         android:layout_below="@+id/city_name_id"/>
 
     <TextView
         android:id="@+id/cod_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:layout_centerInParent="true"
         android:layout_below="@+id/country_name_id"/>
 
     <TextView
         android:id="@+id/coords_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
         android:layout_below="@+id/country_name_id"
+        android:layout_centerInParent="true"
         android:layout_toRightOf="@+id/cod_id"/>
 
     <TextView
         android:id="@+id/temp_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:layout_centerInParent="true"
         android:layout_below="@+id/coords_id"/>
 
     <TextView
         android:id="@+id/sunrise_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:layout_centerInParent="true"
         android:layout_below="@+id/temp_id"/>
 
     <TextView
         android:id="@+id/sunset_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:layout_centerInParent="true"
         android:layout_below="@+id/sunrise_id"/>
 
     <ProgressBar
         android:id="@+id/progress_bar_id"
         android:indeterminate="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

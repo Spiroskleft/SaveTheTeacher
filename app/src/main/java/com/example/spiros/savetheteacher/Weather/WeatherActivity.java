@@ -6,6 +6,7 @@ package com.example.spiros.savetheteacher.Weather;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -20,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.spiros.savetheteacher.MainActivity;
 import com.example.spiros.savetheteacher.R;
 
 import java.lang.ref.WeakReference;
@@ -100,14 +102,24 @@ public class WeatherActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+//            case R.id.action_settings:
+//                return true;
+            case R.id.home2:
+                Intent launchNewIntent = new Intent(this,MainActivity.class);
+                startActivityForResult(launchNewIntent, 0);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
     }
     @Override
     public Object onRetainCustomNonConfigurationInstance() {
