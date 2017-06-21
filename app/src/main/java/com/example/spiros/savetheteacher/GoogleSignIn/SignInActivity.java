@@ -32,7 +32,7 @@ public class SignInActivity extends AppCompatActivity implements
         View.OnClickListener{
 
     public static GoogleSignInAccount acct;
-    private static final String TAG = "SignInActivity";
+    private static final String TAG = "Sign In With Google";
     private static final int RC_SIGN_IN = 9001;
 
     public static GoogleApiClient mGoogleApiClient;
@@ -230,11 +230,13 @@ public class SignInActivity extends AppCompatActivity implements
         if (signedIn) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+            findViewById(R.id.button5).setVisibility(View.VISIBLE);
         } else {
             mStatusTextView.setText(R.string.signed_out);
 
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+            findViewById(R.id.button5).setVisibility(View.GONE);
         }
     }
 

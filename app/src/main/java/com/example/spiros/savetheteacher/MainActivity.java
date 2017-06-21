@@ -386,7 +386,7 @@ private Bitmap bitmap ;
 
             // postImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 
-            final int maxSize = 100;
+            final int maxSize = 960;
             int outWidth;
             int outHeight;
             int inWidth = BitmapFactory.decodeFile(picturePath).getWidth();
@@ -398,7 +398,7 @@ private Bitmap bitmap ;
                 outHeight = maxSize;
                 outWidth = (inWidth * maxSize) / inHeight;
             }
-            bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(picturePath), outWidth, outHeight, true);
+            bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(picturePath), outWidth, outHeight, false);
            // mImageView.setImageBitmap(bitmap);
             uploadimage(bitmap);
           // uploadimage( BitmapFactory.decodeFile(picturePath));
