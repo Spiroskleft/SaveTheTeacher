@@ -28,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.spiros.savetheteacher.Realm.RegionsListActivity;
 import com.example.spiros.savetheteacher.Weather.WeatherActivity;
@@ -384,8 +385,8 @@ private Bitmap bitmap ;
             cursor.close();
 
             // postImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-            uploadimage( BitmapFactory.decodeFile(picturePath));
-            final int maxSize = 960;
+
+            final int maxSize = 100;
             int outWidth;
             int outHeight;
             int inWidth = BitmapFactory.decodeFile(picturePath).getWidth();
@@ -397,10 +398,12 @@ private Bitmap bitmap ;
                 outHeight = maxSize;
                 outWidth = (inWidth * maxSize) / inHeight;
             }
-            bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(picturePath), outWidth, outHeight, false);
-//            mImageView.setImageBitmap(bitmap);
+            bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(picturePath), outWidth, outHeight, true);
+           // mImageView.setImageBitmap(bitmap);
             uploadimage(bitmap);
+          // uploadimage( BitmapFactory.decodeFile(picturePath));
         }
+
     }
     String downloadUrl=null;
     // ImageView postImage = new ImageView(this);
@@ -433,6 +436,7 @@ private Bitmap bitmap ;
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
+               Toast.makeText(MainActivity.this,"Something with uploading Picture",Toast.LENGTH_LONG).show();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
