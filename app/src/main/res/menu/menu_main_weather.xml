@@ -7,8 +7,8 @@
         <!--android:orderInCategory="100"-->
         <!--app:showAsAction="never"/>-->
     <item android:id="@+id/home2"
-        android:title="home"
-        android:icon="@drawable/ic_home_white_24dp"
+        android:title="Αρχική"
+        android:icon="@drawable/ic_home_black_24dp"
         app:showAsAction="always"
         />
 

@@ -16,7 +16,6 @@
         android:background="@color/whiteback"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
         <LinearLayout
@@ -142,14 +141,14 @@
 
 
         </RelativeLayout>
-        <Button
-            android:paddingTop="8dp"
-            android:text="@string/perioxes"
-            android:textColorHighlight="@color/red"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/importbtn"
-            style="@android:style/Widget.Button" />
+        <!--<Button-->
+            <!--android:paddingTop="8dp"-->
+            <!--android:text="@string/perioxes"-->
+            <!--android:textColorHighlight="@color/red"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/importbtn"-->
+            <!--style="@android:style/Widget.Button" />-->
 
 
     </LinearLayout>

@@ -112,14 +112,14 @@ private Bitmap bitmap ;
         //------------------------------------------------------------------------------------------
 
         // Εισαγωγή κουμπιού για να φορτώσουμε στο Realm το JSON αρχείο
-        importbtn = (Button) findViewById(R.id.importbtn);
-        importbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                gotoRegionList();
-            }
-        });
+//        importbtn = (Button) findViewById(R.id.importbtn);
+//        importbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                gotoRegionList();
+//            }
+//        });
 
     }
 
@@ -192,7 +192,7 @@ private Bitmap bitmap ;
     //------------------------------------------------------------------------------------------
 
 
-    // Επιλογή από το Menu
+    // Επιλογές από το Menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -202,15 +202,20 @@ private Bitmap bitmap ;
                  LoadTweets(0,SearchType.MyFollowing);
                 return true;
            case R.id.weatheractivity:
-               Intent launchNewIntent = new Intent(this,WeatherActivity.class);
-               startActivityForResult(launchNewIntent, 0);
+               Intent launchNewIntent122 = new Intent(MainActivity.this,WeatherActivity.class);
+               startActivityForResult(launchNewIntent122, 0);
+               return true;
 
             case R.id.weatherforecast:
                 Intent launchNewIntent2 = new Intent(this,WeatherForecastActivity.class);
                 startActivityForResult(launchNewIntent2, 0);
-//            case R.id.activitylist:
-//                Intent launchNewIntent3 = new Intent(this,ListRegion.class);
-//                startActivityForResult(launchNewIntent3, 0);
+                return true;
+
+            case R.id.regionstoshow:
+                Intent launchNewIntent142 = new Intent(this,RegionsListActivity.class);
+                startActivityForResult(launchNewIntent142, 0);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

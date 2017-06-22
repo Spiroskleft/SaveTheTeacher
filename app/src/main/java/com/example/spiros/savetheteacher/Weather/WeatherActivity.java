@@ -130,7 +130,7 @@ public class WeatherActivity extends AppCompatActivity {
         hideKeyboard(WeatherActivity.this, mInputCityName.getWindowToken());
         String city = mInputCityName.getText().toString();
         if (city.isEmpty()) {
-            Toast.makeText(getApplicationContext(),"No city specified.",
+            Toast.makeText(getApplicationContext(),"Δεν επιλέξατε πόλη.",
                     Toast.LENGTH_LONG).show();
             return;
         }
@@ -141,7 +141,7 @@ public class WeatherActivity extends AppCompatActivity {
         hideKeyboard(WeatherActivity.this, mInputCityName.getWindowToken());
         String city = mInputCityName.getText().toString();
         if (city.isEmpty()) {
-            Toast.makeText(getApplicationContext(),"No city specified.",
+            Toast.makeText(getApplicationContext(),"Δεν επιλέξατε πόλη.",
                     Toast.LENGTH_LONG).show();
             return;
         }
@@ -195,9 +195,10 @@ public class WeatherActivity extends AppCompatActivity {
                 mCoordsTextView.setText(textToPrint);
                 textToPrint = res.getString(R.string.cod) + data.getCod();
                 mCodTextView.setText(textToPrint);
-                String tempF = String.format(Locale.UK,"Temperature: %.2f F", (data.getTemp() - 273.15) * 1.8 + 32.00);
+          // Μετατρέπουμε την θερμοκρασία από Kelvin σε Celcius:
+                String tempF = String.format(Locale.ENGLISH,"Θερμοκρασία: %.2f C", (data.getTemp() - 273.15 )  );
                 mTempTextView.setText(tempF);
-                DateFormat dfLocalTz = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.UK);
+                DateFormat dfLocalTz = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH);
                 Date sunriseTime = new Date(data.getSunrise() * 1000);
                 Date sunsetTime = new Date(data.getSunset() * 1000);
                 textToPrint = res.getString(R.string.sunrise) + dfLocalTz.format(sunriseTime);
@@ -263,7 +264,7 @@ public class WeatherActivity extends AppCompatActivity {
         // Method to test Async. call
         public void runRetrofitTestAsync (final String city) {
             if ( (mActivityRef.get() != null) && (mInProgress.get())) {
-                Toast.makeText(mActivityRef.get(),"Weather fetch in progress.",
+                Toast.makeText(mActivityRef.get(),"Ο καιρός αναζητείται ήδη...",
                         Toast.LENGTH_LONG).show();
                 return;
             }
@@ -288,7 +289,7 @@ public class WeatherActivity extends AppCompatActivity {
         public void runRetrofitTestSync (final String city) {
 
             if ((mActivityRef.get() != null) && (mInProgress.get())) {
-                Toast.makeText(mActivityRef.get(),"Weather fetch in progress.",
+                Toast.makeText(mActivityRef.get(),"Ο καιρός αναζητείται ήδη...",
                         Toast.LENGTH_LONG).show();
                 return;
             }

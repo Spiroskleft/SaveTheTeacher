@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -170,5 +172,28 @@ public class RegionsListActivity extends AppCompatActivity {
         Log.d("Back", "onBackPressed Called");
         Intent ki = new Intent(this, MainActivity.class);
         startActivity(ki);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main_weather, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) {
+//            case R.id.action_settings:
+//                return true;
+            case R.id.home2:
+                Intent launchNewIntent = new Intent(this, MainActivity.class);
+                startActivityForResult(launchNewIntent, 0);
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

@@ -11,10 +11,10 @@
         app:showAsAction="always"
 
         ></item>
-    <!--<item android:id="@+id/home"-->
-        <!--android:title="home"-->
-        <!--android:icon="@drawable/ic_home_white_24dp"-->
-        <!--app:showAsAction="ifRoom" />-->
+    <item android:id="@+id/home"
+        android:title="Αρχική"
+        android:icon="@drawable/ic_home_black_24dp"
+        app:showAsAction="ifRoom" />
 
     <item android:id="@+id/weatheractivity"
         android:title="Τι καιρό θα κάνει;"
@@ -27,10 +27,9 @@
     android:icon="@drawable/prognosi"
     app:showAsAction="always" />
 
-    <!--<item android:id="@+id/activitylist"-->
-        <!--android:title="Περιοχές"-->
-
-        <!--app:showAsAction="always" />-->
+    <item android:id="@+id/regionstoshow"
+        android:title="Περιοχές"
+        app:showAsAction="ifRoom" />
 
 
 

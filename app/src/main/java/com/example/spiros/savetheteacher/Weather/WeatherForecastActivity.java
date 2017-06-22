@@ -19,11 +19,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.spiros.savetheteacher.R;
 import com.example.spiros.savetheteacher.Weather.Helpers.DayFormatter;
 import com.example.spiros.savetheteacher.Weather.Helpers.TemperatureFormatter;
 import com.example.spiros.savetheteacher.Weather.Models.CurrentWeather;
 import com.example.spiros.savetheteacher.Weather.Models.WeatherForecast;
-import com.example.spiros.savetheteacher.R;
 import com.example.spiros.savetheteacher.Weather.Services.LocationService;
 import com.example.spiros.savetheteacher.Weather.Services.WeatherService;
 
@@ -65,6 +65,8 @@ public class WeatherForecastActivity extends Activity {
                     .add(R.id.container, new WeatherFragment())
                     .commit();
         }
+
+
     }
 
     /**
@@ -284,4 +286,5 @@ public class WeatherForecastActivity extends Activity {
             );
         }
     }
+
 }
