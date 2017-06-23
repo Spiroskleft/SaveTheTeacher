@@ -58,6 +58,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -74,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
     private int SelectedUserID = 0;
     private Button buFollow;
     private MyCustomAdapter myadapter;
+    Uri uri = Uri.parse("android.resource://com.example.spiros.savetheteacher/" + R.drawable.schoolbus);
+    Calendar c = Calendar.getInstance();
+    int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
     //------------------------------------------------------------------------------------------
     //Κουμπί για να εισάγουμε στη Realm το JSON αρχείο + Φτιάξιμο της λίστας από το Realm
@@ -120,6 +124,8 @@ private Bitmap bitmap ;
 //                gotoRegionList();
 //            }
 //        });
+
+        kalimeres();
 
     }
 
@@ -271,7 +277,8 @@ private Bitmap bitmap ;
                     @Override
                     public void onClick(View view) {
 
-                         LoadImage();
+                        LoadImage();
+
                     }
                 });
                 iv_post.setOnClickListener(new View.OnClickListener() {
@@ -282,17 +289,31 @@ private Bitmap bitmap ;
                         try {
                             //for space with name
                             tweets = java.net.URLEncoder.encode(  etPost.getText().toString() , "UTF-8");
-                            if (tweets == ""){
-                                tweets = java.net.URLEncoder.encode(  "Γειά σας Δάσκαλοι ... " , "UTF-8");
-                                Toast.makeText(MainActivity.this,"Καλύτερα πόσταρε κάτι δικό σου την απόμενη φορά !",Toast.LENGTH_LONG).show();
+
+                            if (tweets.isEmpty()){
+                                Toast.makeText(MainActivity.this,"ε, σκέψου κάτι !",Toast.LENGTH_LONG).show();
+
                             }
-                            downloadUrl= java.net.URLEncoder.encode(downloadUrl , "UTF-8");
+//                            else if (tweets == " "){
+//                                tweets = java.net.URLEncoder.encode(  "Γειά σας Δάσκαλοι ... " , "UTF-8");
+//                                Toast.makeText(MainActivity.this,"Καλύτερα πόσταρε κάτι δικό σου την απόμενη φορά !",Toast.LENGTH_LONG).show();
+//                                String url="http://83.212.99.161:8083/twitterserver/tweetadd.php?user_id="+ SaveSettings.UserID +"&tweet_text="+ tweets +"&tweet_picture="+ downloadUrl;
+//                                new  MyAsyncTaskgetNews().execute(url);
+//                            }
+                            else {
+                                downloadUrl= java.net.URLEncoder.encode(downloadUrl , "UTF-8");
+                                String url="http://83.212.99.161:8083/twitterserver/tweetadd.php?user_id="+ SaveSettings.UserID +"&tweet_text="+ tweets +"&tweet_picture="+ downloadUrl;
+                                new  MyAsyncTaskgetNews().execute(url);
+                            }
+                           // downloadUrl= java.net.URLEncoder.encode(downloadUrl , "UTF-8");
                         } catch (UnsupportedEncodingException e) {
                             tweets=".";
+                            String url="http://83.212.99.161:8083/twitterserver/tweetadd.php?user_id="+ SaveSettings.UserID +"&tweet_text="+ tweets +"&tweet_picture="+ downloadUrl;
+                            new  MyAsyncTaskgetNews().execute(url);
                         }
-                        String url="http://83.212.99.161:8083/twitterserver/tweetadd.php?user_id="+ SaveSettings.UserID +"&tweet_text="+ tweets +"&tweet_picture="+ downloadUrl;
-                        new  MyAsyncTaskgetNews().execute(url);
+
                         etPost.setText("");
+                        downloadUrl= uri.toString();
 
                     }
                 });
@@ -416,10 +437,12 @@ private Bitmap bitmap ;
 
             uploadimage(bitmap);
 
+            Toast.makeText(MainActivity.this,"Η εικόνα φορτώθηκε !",Toast.LENGTH_LONG).show();
+
         }
 
     }
-Uri uri = Uri.parse("android.resource://com.example.spiros.savetheteacher/" + R.drawable.schoolbus);
+
     String downloadUrl= uri.toString();
 
     // στο FireBase
@@ -477,6 +500,7 @@ Uri uri = Uri.parse("android.resource://com.example.spiros.savetheteacher/" + R.
                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                     downloadUrl = taskSnapshot.getDownloadUrl().toString();
                     hideProgressDialog();
+
                 }
             });
         }
@@ -639,7 +663,28 @@ Uri uri = Uri.parse("android.resource://com.example.spiros.savetheteacher/" + R.
         startActivity(intent100);
     }
 
-//    public void gotoRegionList() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+       kalimeres();
+    }
+
+    public void kalimeres() {
+
+        if(timeOfDay >= 0 && timeOfDay < 12){
+            Toast.makeText(this, "------ Καλημέρα ! :) ------", Toast.LENGTH_SHORT).show();
+        }else if(timeOfDay >= 12 && timeOfDay < 16){
+            Toast.makeText(this, "------ Καλό Μεσημέρι ! :) ------", Toast.LENGTH_SHORT).show();
+        }else if(timeOfDay >= 16 && timeOfDay < 21){
+            Toast.makeText(this, "------ Καλό απόγευμα ! :) ------", Toast.LENGTH_SHORT).show();
+        }else if(timeOfDay >= 21 && timeOfDay < 24){
+            Toast.makeText(this, "------ Καλό βράδυ !  :) ------", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    //    public void gotoRegionList() {
 //        Intent intent100 = new Intent(this, RegionsActivity.class);
 //        startActivity(intent100);
 //    }

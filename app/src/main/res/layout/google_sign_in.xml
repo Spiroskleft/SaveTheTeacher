@@ -72,7 +72,7 @@
             android:layout_weight="0.23"
             android:fontFamily="casual"
             android:onClick="gotoMain"
-            android:text="Save The Teacher Main"
+            android:text="@string/go_to_main"
             android:textAlignment="center"
             android:textColor="@color/darkgreen" />
 

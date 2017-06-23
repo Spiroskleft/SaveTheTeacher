@@ -76,8 +76,9 @@
     <string name="Enter">Είσοδος</string>
     <string name="change_Photo">Κάντε κλικ στην φωτό για να την αλλάξετε !</string>
     <string name="perioxes">Περιοχές</string>
-    <string name="search_async">Αναζήτηση ασύγχρονα</string>
-    <string name="search_sync">Αναζήτηση</string>
+    <string name="search_async">ΑΝΑΖΗΤΗΣΗ ΑΣΥΓΧΡΟΝΑ</string>
+    <string name="search_sync">ΑΝΑΖΗΤΗΣΗ</string>
+    <string name="go_to_main">ΚΕΝΤΡΙΚΗ ΣΕΛΙΔΑ</string>
 
 
 
