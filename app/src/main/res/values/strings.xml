@@ -79,7 +79,7 @@
     <string name="search_async">ΑΝΑΖΗΤΗΣΗ ΑΣΥΓΧΡΟΝΑ</string>
     <string name="search_sync">ΑΝΑΖΗΤΗΣΗ</string>
     <string name="go_to_main">ΚΕΝΤΡΙΚΗ ΣΕΛΙΔΑ</string>
-
+    <string name="add_other_photo">Προσθέστε κάποια άλλη φωτογραφία</string>
 
 
 </resources>

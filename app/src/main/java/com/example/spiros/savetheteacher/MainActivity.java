@@ -424,21 +424,27 @@ private Bitmap bitmap ;
             final int maxSize = 960;
             int outWidth;
             int outHeight;
-            int inWidth = BitmapFactory.decodeFile(picturePath).getWidth();
-            int inHeight = BitmapFactory.decodeFile(picturePath).getHeight();
-            if (inWidth > inHeight) {
-                outWidth = maxSize;
-                outHeight = (inHeight * maxSize) / inWidth;
-            } else {
-                outHeight = maxSize;
-                outWidth = (inWidth * maxSize) / inHeight;
+            int inWidth = 0;
+            int inHeight=0;
+            try {
+                inWidth = BitmapFactory.decodeFile(picturePath).getWidth();
+                inHeight = BitmapFactory.decodeFile(picturePath).getHeight();
+                if (inWidth > inHeight) {
+                    outWidth = maxSize;
+                    outHeight = (inHeight * maxSize) / inWidth;
+                } else {
+                    outHeight = maxSize;
+                    outWidth = (inWidth * maxSize) / inHeight;
+                }
+                bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(picturePath), outWidth, outHeight, false);
+
+                uploadimage(bitmap);
+
+                Toast.makeText(MainActivity.this, "Η εικόνα φορτώθηκε !", Toast.LENGTH_LONG).show();
+            }catch(Exception e){
+                System.out.println(e);
+                Toast.makeText(this, R.string.add_other_photo, Toast.LENGTH_SHORT).show();
             }
-            bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(picturePath), outWidth, outHeight, false);
-
-            uploadimage(bitmap);
-
-            Toast.makeText(MainActivity.this,"Η εικόνα φορτώθηκε !",Toast.LENGTH_LONG).show();
-
         }
 
     }
@@ -469,7 +475,7 @@ private Bitmap bitmap ;
                 @Override
                 public void onFailure(@NonNull Exception exception) {
                     // Handle unsuccessful uploads
-                    Toast.makeText(MainActivity.this,"Something with uploading Picture",Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,"Κάτι πήγε λάθος στη φόρτωση της εικόνας",Toast.LENGTH_LONG).show();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -663,12 +669,12 @@ private Bitmap bitmap ;
         startActivity(intent100);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-       kalimeres();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//       kalimeres();
+//    }
 
     public void kalimeres() {
 
