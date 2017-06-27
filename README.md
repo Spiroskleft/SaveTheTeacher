@@ -31,6 +31,6 @@ SAVE THE TEACHER - Android Application
 
 Αναλυτικότερα ανατρέξτε στον κώδικα της εφαρμογής: https://github.com/Spiroskleft/SaveTheTeacher/blob/master/app/src/main/java/com/example/spiros/savetheteacher/
 
-Ολόκληρο το documentation της εφαρμογής μπορεί να βρεθεί στον φάκελο Documentation του project: https://github.com/Spiroskleft/SaveTheTeacher/tree/master/Documentation/
+Ολόκληρο το documentation της εφαρμογής καθώς και το user-manual μπορεί να βρεθεί στον φάκελο Documentation του project: https://github.com/Spiroskleft/SaveTheTeacher/tree/master/Documentation/
 
 To APK της εφαρμογής βρίσκεται στον σύνδεσμο https://github.com/Spiroskleft/SaveTheTeacher/tree/master/APK/
