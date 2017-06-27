@@ -78,10 +78,8 @@ public class MainActivity extends AppCompatActivity {
     Uri uri = Uri.parse("android.resource://com.example.spiros.savetheteacher/" + R.drawable.schoolbus);
     Calendar c = Calendar.getInstance();
     int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+    int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
 
-    //------------------------------------------------------------------------------------------
-    //Κουμπί για να εισάγουμε στη Realm το JSON αρχείο + Φτιάξιμο της λίστας από το Realm
-    private Button importbtn ;
     //------------------------------------------------------------------------------------------
 private Bitmap bitmap ;
     private ImageView mImageView;
@@ -102,9 +100,7 @@ private Bitmap bitmap ;
 
         //Ορίζουμε τον adapter για τα news
         listnewsData.add(new AdapterItems(null,null,null,"add",null,null,null));
-//        listnewsData.add(new AdapterItems(null,null,null,"loading",null,null,null));
-//        listnewsData.add(new AdapterItems(null,null,null,"notweet",null,null,null));
-//        listnewsData.add(new AdapterItems(null,null,null,"lalala",null,null,null));
+
 
         myadapter=new MyCustomAdapter(this,listnewsData);
         ListView lsNews=(ListView)findViewById(R.id.LVNews);
@@ -115,15 +111,7 @@ private Bitmap bitmap ;
         FirebaseInstanceId.getInstance().getToken();
         //------------------------------------------------------------------------------------------
 
-        // Εισαγωγή κουμπιού για να φορτώσουμε στο Realm το JSON αρχείο
-//        importbtn = (Button) findViewById(R.id.importbtn);
-//        importbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                gotoRegionList();
-//            }
-//        });
+
 
         kalimeres();
 
@@ -294,12 +282,7 @@ private Bitmap bitmap ;
                                 Toast.makeText(MainActivity.this,"ε, σκέψου κάτι !",Toast.LENGTH_LONG).show();
 
                             }
-//                            else if (tweets == " "){
-//                                tweets = java.net.URLEncoder.encode(  "Γειά σας Δάσκαλοι ... " , "UTF-8");
-//                                Toast.makeText(MainActivity.this,"Καλύτερα πόσταρε κάτι δικό σου την απόμενη φορά !",Toast.LENGTH_LONG).show();
-//                                String url="http://83.212.99.161:8083/twitterserver/tweetadd.php?user_id="+ SaveSettings.UserID +"&tweet_text="+ tweets +"&tweet_picture="+ downloadUrl;
-//                                new  MyAsyncTaskgetNews().execute(url);
-//                            }
+
                             else {
                                 downloadUrl= java.net.URLEncoder.encode(downloadUrl , "UTF-8");
                                 String url="http://83.212.99.161:8083/twitterserver/tweetadd.php?user_id="+ SaveSettings.UserID +"&tweet_text="+ tweets +"&tweet_picture="+ downloadUrl;
@@ -664,21 +647,18 @@ private Bitmap bitmap ;
 
     }
 
-    public void gotoRegionList() {
-        Intent intent100 = new Intent(this, RegionsListActivity.class);
-        startActivity(intent100);
-    }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//       kalimeres();
-//    }
 
     public void kalimeres() {
 
-        if(timeOfDay >= 0 && timeOfDay < 12){
+
+        if(timeOfDay >= 6 && timeOfDay < 12){
+            if (dayOfWeek == 2) {
+                Toast.makeText(this, "------ Καλή εβδομάδα ! ------", Toast.LENGTH_SHORT).show();
+            }
+
+            if (dayOfWeek == 6) {
+                Toast.makeText(this, "------ Καλό ΣΚ ! ------", Toast.LENGTH_SHORT).show();
+            }
             Toast.makeText(this, "------ Καλημέρα ! :) ------", Toast.LENGTH_SHORT).show();
         }else if(timeOfDay >= 12 && timeOfDay < 16){
             Toast.makeText(this, "------ Καλό Μεσημέρι ! :) ------", Toast.LENGTH_SHORT).show();
@@ -687,17 +667,11 @@ private Bitmap bitmap ;
         }else if(timeOfDay >= 21 && timeOfDay < 24){
             Toast.makeText(this, "------ Καλό βράδυ !  :) ------", Toast.LENGTH_SHORT).show();
         }
+        else if(timeOfDay >= 0 && timeOfDay < 6){
+            Toast.makeText(this, "------ Καλό Ξημέρωμα !  :) ------", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
-    //    public void gotoRegionList() {
-//        Intent intent100 = new Intent(this, RegionsActivity.class);
-//        startActivity(intent100);
-//    }
 
-
-//    public void WeatherActivity(View view) {
-//        Intent intent = new Intent(this, WeatherActivity.class);
-//        startActivity(intent);
-//    }
 }

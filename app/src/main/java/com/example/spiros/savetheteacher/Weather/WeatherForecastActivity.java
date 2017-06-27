@@ -7,6 +7,7 @@ package com.example.spiros.savetheteacher.Weather;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.spiros.savetheteacher.MainActivity;
 import com.example.spiros.savetheteacher.R;
 import com.example.spiros.savetheteacher.Weather.Helpers.DayFormatter;
 import com.example.spiros.savetheteacher.Weather.Helpers.TemperatureFormatter;
@@ -286,5 +288,10 @@ public class WeatherForecastActivity extends Activity {
             );
         }
     }
-
+    @Override
+    public void onBackPressed() {
+        Log.d("CDA", "onBackPressed Called");
+        Intent ki = new Intent(this, MainActivity.class);
+        startActivity(ki);
+    }
 }

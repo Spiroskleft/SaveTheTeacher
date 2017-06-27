@@ -351,5 +351,10 @@ public class WeatherActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Log.d("CDA", "onBackPressed Called");
+        Intent ki = new Intent(this, MainActivity.class);
+        startActivity(ki);
+    }
 }
