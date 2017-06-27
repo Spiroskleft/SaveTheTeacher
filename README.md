@@ -15,7 +15,7 @@ SAVE THE TEACHER - Android Application
 
 Οι τεχνολογίες επιγραμματικά είναι οι κάτωθι:
 
-- VirtualMachine (VM) : Δημιουργήθηκε για τις ανάγκες της εφαρμογής ένα VM στον ~keanos ( [https](https://okeanos.grnet.gr/home/) [://](https://okeanos.grnet.gr/home/) [keanos](https://okeanos.grnet.gr/home/) [.](https://okeanos.grnet.gr/home/) [grnet](https://okeanos.grnet.gr/home/) [.](https://okeanos.grnet.gr/home/) [gr](https://okeanos.grnet.gr/home/) [/](https://okeanos.grnet.gr/home/) [home](https://okeanos.grnet.gr/home/) [/](https://okeanos.grnet.gr/home/)), όπου στήθηκε ένας MicrosoftWindowsServer 2012, εγκαταστάθηκε το WAMP και ρυθμίστηκε η κατάλληλη πόρτα (localhost:8083) καθώς και τα κατάλληλα configurationfiles του apache, όπως και το firewall του server.
+- VirtualMachine (VM) : Δημιουργήθηκε για τις ανάγκες της εφαρμογής ένα VM στον ~keanos ( [https](https://okeanos.grnet.gr/home/), όπου στήθηκε ένας MicrosoftWindowsServer 2012, εγκαταστάθηκε το WAMP και ρυθμίστηκε η κατάλληλη πόρτα (localhost:8083) καθώς και τα κατάλληλα configurationfiles του apache, όπως και το firewall του server.
 - MYSQL: Φτιάχτηκε βάση δεδομένων(ΒΔ) σε SQL στον παραπάνω server
 - PHP: Υλοποιήθηκαν εφτά (7) scripts σε php αρχεία για την διαχείριση της ΒΔ. (βρίσκονται στο φάκελο php_Files του project: https://github.com/Spiroskleft/SaveTheTeacher/tree/master/php_Files)
 - FirebaseLogin: Χρησιμοποιήθηκε το firebase για Login στην εφαρμογή
