@@ -673,5 +673,9 @@ private Bitmap bitmap ;
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }
