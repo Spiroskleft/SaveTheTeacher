@@ -1,6 +1,7 @@
 
 SAVE THE TEACHER - Android Application
 
+![alt text](https://user-images.githubusercontent.com/25661319/27577265-b067d7b2-5b28-11e7-9de5-a9da14f10b48.jpg)
 
 1.Γενική Ιδέα Εφαρμογής
 
