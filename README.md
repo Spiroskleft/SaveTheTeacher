@@ -33,3 +33,7 @@
 Ολόκληρο το documentation της εφαρμογής καθώς και το user-manual μπορεί να βρεθεί στον φάκελο Documentation του project: https://github.com/Spiroskleft/SaveTheTeacher/tree/master/Documentation/
 
 To APK της εφαρμογής βρίσκεται στον σύνδεσμο https://github.com/Spiroskleft/SaveTheTeacher/tree/master/APK/
+
+### Tips
+
+Για αναζήτηση μίας "σκέψης" πληκτρολογίστε στην έρευνα εντός της εφαρμογής "good" ή "bad", ενδεικτικά.
